@@ -15,9 +15,11 @@ Andrej Nano
 from kivy.app import App
 from kivy.uix.button import Button
 import gui
+
+message_var = "Click here"
+
 class TestApp(App):
     def build(self):
-        return Button(text='Hello World')
+        return Button(text=message_var)
 
 TestApp().run()
-
