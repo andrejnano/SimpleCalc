@@ -5,5 +5,7 @@
 ## 2017 @ FIT VUT, BRNO
 
 Peter Marko
+
 Stanislav Mechl
+
 Andrej Naňo
