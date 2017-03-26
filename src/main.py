@@ -1,27 +1,28 @@
-#!/usr/local/bin/python
-
-'''
-
-SimpleCalc
-2. projekt IVS / 2017
-@ FIT VUT, BRNO
-
-Peter Marko
-Stanislav Mechl
-Andrej Nano
-
-'''
+#!/bin/python3
+    
+    
+import kivy
 
 from kivy.app import App
-from kivy.uix.button import Button
-import gui
 
-message_var = "Click here"
 
-class TestApp(App):
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.boxlayout import BoxLayout
+from kivy.core.window import Window
+class CalcGridLayout(GridLayout):
+        # self.display.text = 
+    def calculate(self,calculation):
+        try:
+            self.display.text = str(eval(calculation))
+        except Exception:
+            self.display.text = 'Error'
+
+
+class CalculatorApp(App):
+
     def build(self):
-        return Button(text=message_var)
+        
+        return CalcGridLayout()
 
-TestApp().run()
-
-#byl jsem tady! S
+calcApp = CalculatorApp()
+calcApp.run()
