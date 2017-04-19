@@ -1,3 +1,5 @@
+#!/bin/python
+
 import math
 import numbers
 
@@ -38,10 +40,12 @@ def sqrt ( A ):
 def factorial( A ):
     if ( not (isinstance(A, numbers.Integral) )):
         raise ValueError('Argument passed to function factorial is not int')
+    if ( A < 0):
+        raise ValueError('Factorial from negative number')
     A = int(A)
     result = A
     A -= 1
     while ( A > 1 ) :
         result *= A
         A -= 1
-    return result 
+    return float(result) 
