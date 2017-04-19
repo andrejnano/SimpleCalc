@@ -10,7 +10,6 @@
 # |   Andrej Nano           |
 # + ----------------------- +   
 
-import mathFunc
 import kivy
 from kivy.config import Config
 from kivy.app import App
