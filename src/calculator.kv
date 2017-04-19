@@ -1,26 +1,28 @@
 
 <CustButton@Button>:
-    font_size: '30sp'
-    color: 0,0,0,1
-    background_normal: 'wall.jpg'
-    background_down: 'wall2.jpg'
+    font_size: '56sp'
+    canvas.before:
+        Color:
+            rgba: 0.819, 0.247, 0.196, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
 
 <CalcGridLayout>:
     id: calculator
     display: entry
     rows: 5
     columns: 4
-    padding: 10
-    spacing: 10
+    padding: 0 
+    spacing: 0
 
     BoxLayout:
         TextInput:
             id: entry
             font_size: '50sp'
-            multiline: True
-
+            multiline: False 
     BoxLayout:
-        spacing: 10 
+        spacing: 0 
         CustButton:
             text: "7"
             on_press: entry.text += self.text
@@ -34,7 +36,7 @@
             text: "+"
             on_press: entry.text += self.text
     BoxLayout:
-        spacing: 10
+        spacing: 0
         CustButton:
             text: "4"
             on_press: entry.text += self.text
@@ -49,7 +51,7 @@
             on_press: entry.text += self.text
 
     BoxLayout:
-        spacing: 10
+        spacing: 0
         CustButton:
             text: "1"
             on_press: entry.text += self.text
@@ -64,7 +66,7 @@
             on_press: entry.text += self.text
         
     BoxLayout:
-        spacing: 10
+        spacing: 0
         CustButton:
             text: "AC"
             on_press: entry.text = ""
