@@ -3,14 +3,13 @@
 import pytest
 import mat_module
 
-# print("noooooooooooooooooooooooo")
-# def add_case(A,B):
-    # return mat_module.add(A,B)
 def test_add():
+# klasicke porovnanie vysledkov pomocou assertu
     assert mat_module.add(1.0,3.14159265358) == 4.14159265358 
     assert mat_module.add(1,0) == 1
     assert mat_module.add(42,-42) == 0
     assert mat_module.add(-42,-42) == -84
+# testovanie vynimiek
     with pytest.raises(Exception):
         mat_module.add(-42,"str")
     with pytest.raises(Exception):
