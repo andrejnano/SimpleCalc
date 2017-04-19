@@ -4,6 +4,7 @@
     color: (0.11, 0.098, 0.098, 1)
     background_normal: ''
     background_color: (0.925, 0.941, 0.945, 1)
+    font_name: 'assets/firasansbold.ttf'
 
 <CalcGridLayout>:
     id: calculator
@@ -11,15 +12,34 @@
     rows: 6
     columns: 4
     padding: 0 
-    spacing: 0
-
+    spacing: 1
+    row_force_default: True
+    row_default_height: 150
+    col_force_default: True
+    col_default_width: 150
+     
     BoxLayout:
         TextInput:
             id: entry
             font_size: '42sp'
             multiline: False 
     BoxLayout:
-        spacing: 0 
+        spacing: 1 
+        CustButton:
+            text: "AC"
+            on_press: entry.text = ""
+        CustButton:
+            text: "sqrt"
+            on_press: entry.text = "sqrt" 
+        CustButton:
+            text: "exp"
+            on_press: entry.text = "exp" 
+        CustButton:
+            text: "/"
+            on_press: entry.text += self.text
+   
+    BoxLayout:
+        spacing: 1 
         CustButton:
             text: "7"
             on_press: entry.text += self.text
@@ -30,10 +50,10 @@
             text: "9"
             on_press: entry.text += self.text
         CustButton:
-            text: "+"
+            text: "x"
             on_press: entry.text += self.text
     BoxLayout:
-        spacing: 0
+        spacing: 1
         CustButton:
             text: "4"
             on_press: entry.text += self.text
@@ -48,7 +68,7 @@
             on_press: entry.text += self.text
 
     BoxLayout:
-        spacing: 0
+        spacing: 1
         CustButton:
             text: "1"
             on_press: entry.text += self.text
@@ -59,20 +79,19 @@
             text: "3"
             on_press: entry.text += self.text
         CustButton:
-            text: "*"
+            text: "+"
             on_press: entry.text += self.text
         
     BoxLayout:
-        spacing: 0
-        CustButton:
-            text: "AC"
-            on_press: entry.text = ""
+        spacing: 1
         CustButton:
             text: "0"
             on_press: entry.text += self.text
         CustButton:
-            text: "="
-            on_press: calculator.calculate(entry.text)
-        CustButton:
-            text: "/"
+            text: ","
             on_press: entry.text += self.text
+        CustButton:
+            size_hint_x: None
+            width: 300
+            text: "=" 
+            on_press: calculator.calculate(entry.text)
