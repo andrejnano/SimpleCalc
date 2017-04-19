@@ -12,11 +12,19 @@
 
 import mathFunc
 import kivy
+from kivy.config import Config
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.core.window import Window
 
+
+# kivy configs
+Config.set('graphics', 'resizable', 0)
+Config.set('graphics', 'height', 900)
+Config.set('graphics', 'width', 600)
+Config.set('graphics', 'borderless', 0)
+Config.write()
 
 class CalcGridLayout(GridLayout):
     def calculate(self,calculation):
