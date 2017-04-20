@@ -108,3 +108,23 @@ def test_factorial():
         mat_module.factorial(1,2)
     with pytest.raises(Exception):
         mat_module.factorial()
+
+def test_evaluate():
+    assert mat_module.evaluate("√81") == 9
+    assert mat_module.evaluate("√ 81") == 9
+    assert mat_module.evaluate("6!") == 720 
+    assert mat_module.evaluate("6 !") == 720   
+    assert mat_module.evaluate("10 /4.654") == 2.1486892995272884
+    assert mat_module.evaluate("7.32 * -1.2122") == -8.873304
+    assert mat_module.evaluate("6 !") == 720    
+    assert mat_module.evaluate("( 1+2-7.81 )*3!") == -28.86
+    with pytest.raises(Exception):
+        assert mat_module.evaluate("6.32!")
+    with pytest.raises(Exception):   
+        assert mat_module.evaluate("!")   
+    with pytest.raises(Exception):   
+        assert mat_module.evaluate("3!!") 
+    with pytest.raises(Exception):   
+        assert mat_module.evaluate("nieco")
+    with pytest.raises(Exception):   
+        assert mat_module.evaluate("0 / 0") 
