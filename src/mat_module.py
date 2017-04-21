@@ -74,6 +74,18 @@ def log( A ):
     else:
         return math.log(A)
 
+def power( A , B ):
+    if ( not (isinstance(A, numbers.Real) and isinstance(B, numbers.Real))):
+        raise ValueError('Argument passed to function pow is not float')
+    if ( B < 0 or not (B).is_integer()):
+        raise ValueError('Power to unnatural exponent')
+    else:
+        result = 1
+        B = int(B)
+        for i in range(B):
+            result *= A
+        return result
+
 def isnum( char ):
     if (ord(char) > 46 and ord(char) < 58):
         return 1
@@ -109,7 +121,6 @@ def trigonFunc(string, sign,func):
          ridx = lidx + 4 + find_nan(string[lidx+4:])
          string = string[:lidx] + (str("%.12f" % func(float(string[lidx+3:ridx]))).rstrip('0').rstrip('.')) + string[ridx:]
          break
-    print(string)
     
     return string
 
@@ -125,14 +136,10 @@ def calcFactorSqrt( string ):
         second = sqr
         tmpstr = string[:sqr_sindex -1]
         sqr_sidx = find_nan(tmpstr[::-1])
-        print(sqr_sidx)
         first = string[sqr_sindex-sqr_sidx-1:sqr_sindex-1]
-        print(first)
         if(first is ""):
             first = "2"
         sqr = str("%.12f" % root(float(first),float(second))).rstrip('0').rstrip('.')
-        print"this is it"
-        print(string[:sqr_sindex-sqr_sidx-2])
         string =  string[:sqr_sindex-sqr_sidx - 1] + sqr + string[sqr_sindex + sqr_eindex +2:]
         sqr_sindex = string.rfind("\xe2\x88\x9a")
 
@@ -262,6 +269,7 @@ def calcBasicOperations( string, sign, operation ):
 # vypocita jednoduchy vyraz zlozeny zo zakladnych operacii + - * / sqrt !
 def calculate( string ):
     string = calcFactorSqrt(string)
+    string = calcBasicOperations( string , "^" , power )
     string = calcBasicOperations( string , "/" , div )
     string = calcBasicOperations( string , "*" , mul )
     string = calcSum(string)
