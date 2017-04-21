@@ -3,7 +3,7 @@
 import math
 import numbers
 
-
+# spusti funkciu evaluate pre pocitanie
 def add ( A , B ):
     if ( not (isinstance(A, numbers.Real) and isinstance(B, numbers.Real))):
         raise ValueError('Argument passed to function add is not float')
@@ -38,7 +38,7 @@ def sqrt ( A ):
 
 
 def factorial( A ):
-    if ( not (isinstance(A, numbers.Integral) )):
+    if ( not (A).is_integer()):
         raise ValueError('Argument passed to function factorial is not int')
     if ( A < 0):
         raise ValueError('Factorial from negative number')
@@ -49,3 +49,145 @@ def factorial( A ):
         result *= A
         A -= 1
     return float(result) 
+
+def isnum( char ):
+    if (ord(char) > 46 and ord(char) < 58):
+        return 1
+    else:
+        return 0
+
+# funkcia ktoru treba spustit pre pocitanie
+def evaluate( string ):
+    while( string.find("(") != -1 ):
+        l_idx = string.rfind("(")
+        r_idx = string.find(")")
+        string = string[:l_idx] +calculate(string[l_idx+1:r_idx]) + string[r_idx+1:]
+    result = calculate(string)
+    if(result[0] is "+"):
+        return result[1:]
+    else:
+        return result 
+
+
+def find_nan( string ):
+    i = 0
+    for c in string:
+        if not ((ord(c) > 47 and ord(c) < 58) or c is '.' or c is 'e' ):
+            return i
+        if(c is "e"):
+            return i + find_nan(string[i+2:]) + 2
+        i += 1
+    return len(string)
+
+def calcFactorSqrt( string ):
+    sqr_sindex = string.rfind("\xe2\x88\x9a")
+    while (sqr_sindex >= 0):
+        if (isnum(string[sqr_sindex-1])):
+            string = string[:sqr_sindex] + "*" + string[sqr_sindex:]
+            sqr_sindex += 1
+        sqr = string[sqr_sindex + 3:]
+        sqr_eindex = find_nan(sqr) 
+        sqr = sqr[:sqr_eindex]
+        sqr = "%g" % sqrt(float(sqr))
+        string =  string[:sqr_sindex] + sqr + string[sqr_sindex + sqr_eindex + 3:]
+        sqr_sindex = string.rfind("\xe2\x88\x9a")
+
+    fac_eindex = string.find("!")
+    while (fac_eindex >= 0):
+        fac = string[:fac_eindex]
+        fac_sindex = find_nan(fac[::-1]) 
+        fac = fac[fac_eindex - fac_sindex:fac_eindex]
+        fac = "%g" % factorial(float(fac))
+        string =  string[:fac_eindex - fac_sindex] + fac + string[fac_eindex + 1:]
+        fac_eindex = string.find("!")
+    return string
+
+def determineSign( string ):
+    minuses=1
+    i=0
+    l = len(string)
+    if(l == -1):
+        return "+"
+    # tmpstr=""
+    while((string[i] is "+" or string[i] is "-" or string[i] is " ") and i < l ):
+        if(string[i] is "-"):
+            minuses += 1
+        i += 1
+    if ( minuses % 2 == 0):
+        string = "-" + string[i:]
+    else:
+        string = "+" + string[i:]
+    return string
+
+def calcSum( string ):
+    # nacitaj prve cislo
+    # vyhodnot znamienko
+    while(string is not ""):
+        string = determineSign(string)
+        i = 1 + find_nan(string[1:])
+        first = string[:i]
+        string = string[i:]
+        if(string is ""):
+            return first
+        string = determineSign(string)
+        i = 1 + find_nan(string[1:])
+        second =  string[:i]
+        string = "%g" % add(float(first),float(second)) + string[i:]
+    return string
+
+def calcBasicOperations( string, sign, operation ):
+    # sign index je index znamienka
+    sign_index = string.find(sign)
+    while (sign_index >= 0):
+        # index praveho konca prveho argumentu funkcie operation
+        FNumIdx_r = sign_index - 1
+        while (string[FNumIdx_r] is ' '):
+            FNumIdx_r -= 1
+        FNumIdx_l = find_nan(string[FNumIdx_r::-1])
+        FNumIdx_r += 1
+        # bude prvy argument do funkcie operation
+        FNum = string[FNumIdx_r - FNumIdx_l :FNumIdx_r]
+        FNumIdx_ll = FNumIdx_r - FNumIdx_l
+        # print(string[FNumIdx_r - FNumIdx_l - 1])
+            
+        if (string[FNumIdx_r - FNumIdx_l - 1] is "-" or string[FNumIdx_r - FNumIdx_l - 1] is "+" ):
+            FNumIdx_ll = FNumIdx_r - FNumIdx_l - 1
+            FNumIdx_r = find_nan(string[FNumIdx_ll +1 :])
+            # print(string[FNumIdx_r - FNumIdx_l - 1:FNumIdx_r+2])
+            FNum = string[FNumIdx_ll :FNumIdx_ll + FNumIdx_r+1]
+                        
+
+        SNumIdx_l = sign_index + 1
+        SNumIdx_r = find_nan(string[SNumIdx_l:])
+        
+        # FNumIdx_r += 1
+        SNum = string[SNumIdx_l:SNumIdx_l + SNumIdx_r]
+        
+        if (string[SNumIdx_l] is "-" or string[SNumIdx_l] is "+" ):
+            SNumIdx_l += 1
+            SNumIdx_r = find_nan(string[SNumIdx_l:])
+            SNum = string[SNumIdx_l-1:SNumIdx_l + SNumIdx_r]
+        
+        if(SNum is ""):
+            break
+
+        result = "%g" % operation(float(FNum),float(SNum))
+        if(result[0] is not "-"):
+            string = string[:FNumIdx_ll] +"+"+ result + string[SNumIdx_l + SNumIdx_r:]
+        else:
+            string = string[:FNumIdx_ll] + result + string[SNumIdx_l + SNumIdx_r:]
+        sign_index = string.find(sign)
+    return string
+
+    
+# vypocita jednoduchy vyraz zlozeny zo zakladnych operacii + - * / sqrt !
+def calculate( string ):
+    string = calcFactorSqrt(string)
+    string = calcBasicOperations( string , "/" , div )
+    string = calcBasicOperations( string , "*" , mul )
+    string = calcSum(string)
+    return string
+
+
+
+# spusti funkciu evaluate pre pocitanie
