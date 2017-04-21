@@ -133,7 +133,7 @@ def calcFactorSqrt( string ):
         sqr = str("%.12f" % root(float(first),float(second))).rstrip('0').rstrip('.')
         print"this is it"
         print(string[:sqr_sindex-sqr_sidx-2])
-        string =  string[:sqr_sindex-sqr_sidx - 1] + sqr + string[sqr_sindex + sqr_eindex:]
+        string =  string[:sqr_sindex-sqr_sidx - 1] + sqr + string[sqr_sindex + sqr_eindex +2:]
         sqr_sindex = string.rfind("\xe2\x88\x9a")
 
     fac_eindex = string.find("!")
