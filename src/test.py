@@ -1,5 +1,5 @@
 #!/bin/python
-
+# -*- coding: <unicode> -*-
 import pytest
 import mat_module
 
@@ -76,17 +76,18 @@ def test_div():
         mat_module.factorial(99,456.2,"abc")
 
 
-def test_sqrt():
-    assert mat_module.sqrt(6.022e+23) == 776015463763.4485 
-    assert mat_module.sqrt(25) == 5
-    assert mat_module.sqrt(0) == 0
-    assert mat_module.sqrt(2) == 1.4142135623730951
+def test_root():
+    assert mat_module.root(2,6.022e+23) == 776015463763.4485 
+    assert mat_module.root(2,25) == 5
+    assert mat_module.root(2.5,7) == 2.17790642448278
+    assert mat_module.root(0.3,2) == 10.079368399158986 
+    assert mat_module.root(2,2) == 1.4142135623730951
     with pytest.raises(Exception):
-        mat_module.sqrt(-2)
+        mat_module.root(2,-2)
     with pytest.raises(Exception):
-        mat_module.sqrt("str","ing")
+        mat_module.root("str","ing")
     with pytest.raises(Exception):
-        mat_module.sqrt([-0.451,2.77,3.4,64.4])
+        mat_module.root([-0.451,2.77,3.4,64.4])
     with pytest.raises(Exception):
         mat_module.factorial()
     with pytest.raises(Exception):
@@ -94,12 +95,12 @@ def test_sqrt():
 
 
 def test_factorial():
-    assert mat_module.factorial(5) == 120 
-    assert mat_module.factorial(15) == 1307674368000
-    assert mat_module.factorial(0) == 0
-    assert mat_module.factorial(2) == 2
+    assert mat_module.factorial(5.0) == 120 
+    assert mat_module.factorial(15.0) == 1307674368000
+    assert mat_module.factorial(0.0) == 0
+    assert mat_module.factorial(2.0) == 2
     with pytest.raises(Exception):
-        mat_module.factorial(-2)
+        mat_module.factorial(-2.0)
     with pytest.raises(Exception):
         mat_module.factorial("str","ing")
     with pytest.raises(Exception):
@@ -109,22 +110,19 @@ def test_factorial():
     with pytest.raises(Exception):
         mat_module.factorial()
 
+
 def test_evaluate():
-    assert mat_module.evaluate("√81") == 9
-    assert mat_module.evaluate("√ 81") == 9
-    assert mat_module.evaluate("6!") == 720 
-    assert mat_module.evaluate("6 !") == 720   
-    assert mat_module.evaluate("10 /4.654") == 2.1486892995272884
-    assert mat_module.evaluate("7.32 * -1.2122") == -8.873304
-    assert mat_module.evaluate("6 !") == 720    
-    assert mat_module.evaluate("( 1+2-7.81 )*3!") == -28.86
+    assert mat_module.evaluate("\xe2\x88\x9a81") == "9"
+    assert mat_module.evaluate("2.1*(4\xe2\x88\x9a81) - 4!") == "-17.7"
+    assert mat_module.evaluate("6!") == "720" 
+    assert mat_module.evaluate("10/4.654") == "2.148689299527"
+    assert mat_module.evaluate("7.32 *-1.2122") == "-8.873304"
+    assert mat_module.evaluate("(1+2-7.81)*3!") == "-28.86"
     with pytest.raises(Exception):
         assert mat_module.evaluate("6.32!")
     with pytest.raises(Exception):   
         assert mat_module.evaluate("!")   
     with pytest.raises(Exception):   
-        assert mat_module.evaluate("3!!") 
-    with pytest.raises(Exception):   
         assert mat_module.evaluate("nieco")
     with pytest.raises(Exception):   
-        assert mat_module.evaluate("0 / 0") 
+        assert mat_module.evaluate("0/0") 
