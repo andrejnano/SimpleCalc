@@ -85,6 +85,8 @@ class CalcGridLayout(GridLayout):
     def numpress(self, num):
         if not self.op_allowed:
             self.op_allowed = True
+        if not self.trig_allowed:
+            self.trig_allowed = True
         self.display.text += num
 
     def oppress(self, op):
@@ -120,21 +122,23 @@ class CalculatorApp(App):
     # vykreslenie
     def build(self):
         self.grid = CalcGridLayout()
+        self.title = "SimpleCalc"
+        self.icon = "assets/favicon2.ico"
         return self.grid
  
     # pomocne okno
     def dochelp(self, *args):
-        box = BoxLayout();
-        box.add_widget(Label(text="""Lorem ipsum dolor sit amet, \n consectetur
-        \nVestibulum dictum \nvelit eu mattis bibendum.
-        """, size=(600, 400), halign='center'))
+        box = BoxLayout()
 
-        button1 = Button(text="Zatvorit okno", size_hint=(None, None),
-                size=(700, 150))
+        label1 = (Label(text="SimpleCalc v1.0\nIVS 2016/17 projekt c. 2\n\n Kalkulacku sa da ovladat pomocou tlacidiel,\n alebo textoveho vstupu.\nV pripade trigonometrickych funkcii,\n mozte vyraz zadat v tvare 'sinx' alebo 'sin(x)'.\nObidve moznosti su spravne",
+
+                         size=(45, 45), background_normal='', background_color=(0.204,0.596,0.859,1))
+
+        box.add_widget(label1)
         box.add_widget(button1)
-        
-        popup = Popup(title='Help', content=box, size_hint=(None, None),
-                size=(750, 900), background_normal='', background_color=(0, 0, 0, 0.5))
+
+        popup = Popup(title='Informacie k pouzivaniu', content=box, size_hint=(None, None),
+                size=(400, 350), background_normal='', background_color=(0, 0, 0, 0.5))
         
         button1.bind(on_press=popup.dismiss)
         popup.open()
