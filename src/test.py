@@ -21,22 +21,6 @@ def test_add():
     with pytest.raises(Exception):
         mat_module.factorial(-1.54,59,0.3)
 
-def test_sub():
-    assert mat_module.sub(1.0,3.14159265358) == -2.14159265358 
-    assert mat_module.sub(1,0) == 1
-    assert mat_module.sub(42,-42) == 84
-    assert mat_module.sub(-42,-42) == 0
-    with pytest.raises(Exception):
-        mat_module.sub(9.3333,"str")
-    with pytest.raises(Exception):
-        mat_module.sub("str","ing")
-    with pytest.raises(Exception):
-        mat_module.sub([1,-1.4142],[3,4])
-    with pytest.raises(Exception):
-        mat_module.factorial()
-    with pytest.raises(Exception):
-        mat_module.factorial(0,0,0)
-
 def test_mul():
     assert mat_module.mul(6.022e+23,3.14159265358) == 1.891867095985876e+24 
     assert mat_module.mul(99999.1534564,0) == 0
@@ -115,9 +99,14 @@ def test_evaluate():
     assert mat_module.evaluate("\xe2\x88\x9a81") == "9"
     assert mat_module.evaluate("2.1*(4\xe2\x88\x9a81) - 4!") == "-17.7"
     assert mat_module.evaluate("6!") == "720" 
-    assert mat_module.evaluate("10/4.654") == "2.148689299527"
-    assert mat_module.evaluate("7.32 *-1.2122") == "-8.873304"
-    assert mat_module.evaluate("(1+2-7.81)*3!") == "-28.86"
+    assert mat_module.evaluate("10/4.654") == "%g" % 2.148689299527
+    assert mat_module.evaluate("7.32 *-1.2122") == "%g" % -8.873304
+    assert mat_module.evaluate("2^3!") == "%g" %  64
+    assert mat_module.evaluate("(1+7.21-4)/(3*2.84-7)") == "%g" %  2.76973684211
+    assert mat_module.evaluate("6.022e23-6.022e22") == "%g" %  5.4198e+23
+    assert mat_module.evaluate("(1+sin(2-cos(-7))-7.81)") == "%g" %  -5.86225307094
+    assert mat_module.evaluate("(1+log(2-tan(-7))-7.81)") == "%g" %  -5.75518357386
+    assert mat_module.evaluate("log(2)") == "%g" %  0.69314718056
     with pytest.raises(Exception):
         assert mat_module.evaluate("6.32!")
     with pytest.raises(Exception):   
@@ -126,3 +115,5 @@ def test_evaluate():
         assert mat_module.evaluate("nieco")
     with pytest.raises(Exception):   
         assert mat_module.evaluate("0/0") 
+    with pytest.raises(Exception):   
+        assert mat_module.evaluate("log-5") 
