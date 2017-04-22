@@ -45,23 +45,41 @@ from kivy.core.window import Window
 
 
 class CalcGridLayout(GridLayout):
+
+    def __init__(self, **kwargs):
+        super(CalcGridLayout, self).__init__(**kwargs)
+        self.op_allowed = True
+
+    def numpress(self, num):
+        if not self.op_allowed:
+            self.op_allowed = True
+        self.display.text += num
+
+    def oppress(self, op):
+        if self.op_allowed:
+            self.display.text += op
+            self.op_allowed = False
+        else: pass
+
     def calculate(self,calculation):
         try:
             self.display.text = str(eval(calculation))
         except Exception:
             self.display.text = 'Error'
 
+    def delete(self):
+        self.display.text = self.display.text[:-1]
+
+    def ac(self):
+        self.display.text = ""
+
+
 class CalculatorApp(App):
    
     # vykreslenie
     def build(self):
         self.grid = CalcGridLayout()
-        return self.grid 
-    
-    def numpress(self, num):
-        print("numpressed")
-    def oppress(self, op):
-        print("opppressed")
+        return self.grid
  
     # pomocne okno
     def dochelp(self, *args):
@@ -79,8 +97,6 @@ class CalculatorApp(App):
         
         button1.bind(on_press=popup.dismiss)
         popup.open()
-
-
 
 
 calc_inst = CalculatorApp()
