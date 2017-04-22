@@ -72,9 +72,11 @@ class CalcGridLayout(GridLayout):
 
     def __init__(self, **kwargs):
         super(CalcGridLayout, self).__init__(**kwargs)
-        self.op_allowed = True
+        self.op_allowed = False
         self.dot_allowed = True
         self.trig_allowed = True
+        self.plus_allowed = True
+        self.minus_allowed = True
 
     def dotpress(self):
         if self.dot_allowed:
@@ -87,7 +89,19 @@ class CalcGridLayout(GridLayout):
             self.op_allowed = True
         if not self.trig_allowed:
             self.trig_allowed = True
+        if not self.plus_allowed:
+            self.plus_allowed = True
+        if not self.minus_allowed:
+            self.minus_allowed = True
         self.display.text += num
+
+    def signpress(self, sign):
+        if sign == "+" and self.plus_allowed:
+            self.display.text += sign
+
+        elif sign == "-" and self.minus_allowed:
+            self.display.text += sign
+
 
     def oppress(self, op):
         if self.op_allowed:
@@ -106,15 +120,27 @@ class CalcGridLayout(GridLayout):
         try:
             self.display.text = mat_module.evaluate(str(calculation))
         except Exception:
-            self.display.text = 'Error'
+            self.display.text = 'ERROR'
 
     def delete(self):
+        if self.display.text[-1] == "/" or self.display.text[-1] == "*" or self.display.text[-1] == "\xe2\x88\x9a" or self.display.text[-1] == "^":
+            self.op_allowed = True
+
         self.display.text = self.display.text[:-1]
+        if self.display.text == "":
+            self.op_allowed = False
+            self.dot_allowed = True
+            self.trig_allowed = True
+            self.plus_allowed = True
+            self.minus_allowed = True
 
     def ac(self):
         self.display.text = ""
+        self.op_allowed = False
         self.dot_allowed = True
         self.trig_allowed = True
+        self.plus_allowed = True
+        self.minus_allowed = True
 
 
 class CalculatorApp(App):
