@@ -1,40 +1,64 @@
 #!/bin/python
 
-## @package mat_module
-#  Documentation for math_module.
+##
+# @file math_module.py
+# @author Peter Marko 
+# @package math_module
+# @date 22 April 2017
+# @brief documentation of source code of math_module which will be used in main.py 
+# 
+# this module defines functions for evaluation of string as mathematical operation
 #
 #  More details.
 
+##
+# Function adds x to y
+# @param x,y
+# @return sum
 import math
 import numbers
 
 # spusti funkciu evaluate pre pocitanie
+
+##
+# Function adds A and B
+# @param A,B
+# @pre A and B are float numbers
+# @return sum of A and B
 def add ( A , B ):
     if ( not (isinstance(A, numbers.Real) and isinstance(B, numbers.Real))):
         raise ValueError('Argument passed to function add is not float')
     else:
         return A + B
-    
 
-def sub ( A , B ):
-    if ( not (isinstance(A, numbers.Real) and isinstance(B, numbers.Real))):
-        raise ValueError('Argument passed to function sub is not float')
-    else:
-        return A - B
-
+##
+# Function muls A and B
+# @param A,B
+# @pre A and B are float numbers
+# @return multiplication of A and B
 def mul ( A , B ):
     if ( not (isinstance(A, numbers.Real) and isinstance(B, numbers.Real))):
         raise ValueError('Argument passed to function mul is not float')
     else:
         return A * B
 
-
+##
+# Function divides A by B
+# @param A,B
+# @pre A and B are float numbers
+# @return A divided by B
 def div ( A , B ):
     if ( not (isinstance(A, numbers.Real) and isinstance(B, numbers.Real))):
         raise ValueError('Argument passed to function div is not float')
     else:
         return A / B
 
+
+##
+# Function calculates A-th root of number B
+# @param A,B
+# @pre A and B are float numbers
+# @return A-th root of B
 def root ( A,B ):
     if ( not (isinstance(A, numbers.Real) and isinstance(B, numbers.Real))):
         raise ValueError('Argument passed to function root is not float')
@@ -42,6 +66,11 @@ def root ( A,B ):
         return B**(1.0/A)
 
 
+##
+# Function calculates factorial of A
+# @param A
+# @pre A is float but natural number
+# @return factorial of A 
 def factorial( A ):
     if ( not (A).is_integer()):
         raise ValueError('Argument passed to function factorial is not int')
@@ -55,30 +84,62 @@ def factorial( A ):
         A -= 1
     return float(result) 
 
+
+##
+# Function finds sine of A
+# @param A
+# @pre A is float number
+# @return sine of A
 def sin( A ):
     if ( not (isinstance(A, numbers.Real) )):
         raise ValueError('Argument passed to function sin is not float')
     else:
         return math.sin(A)
 
+
+##
+# Function finds cosine of A
+# @param A
+# @pre A is float number
+# @return cosine of A
 def cos( A ):
     if ( not (isinstance(A, numbers.Real) )):
         raise ValueError('Argument passed to function cos is not float')
     else:
         return math.cos(A)
 
+
+##
+# Function finds tangent of A
+# @param A
+# @pre A is float number
+# @return tangent of A
 def tan( A ):
     if ( not (isinstance(A, numbers.Real) )):
         raise ValueError('Argument passed to function tan is not float')
     else:
         return math.tan(A)
 
+
+##
+# Function finds natural logarithm of A
+# @param A
+# @pre A is float number
+# @return natural logarithm of A
 def log( A ):
     if ( not (isinstance(A, numbers.Real) )):
         raise ValueError('Argument passed to function log is not float')
     else:
         return math.log(A)
 
+##
+# Function calculates value of A to the power of B
+# @param A base
+# @param B exponent
+# @pre 
+# -# A and B are float numbers
+# -# B is natural whole number
+# @return A to the power B
 def power( A , B ):
     if ( not (isinstance(A, numbers.Real) and isinstance(B, numbers.Real))):
         raise ValueError('Argument passed to function pow is not float')
@@ -91,25 +152,83 @@ def power( A , B ):
             result *= A
         return result
 
+##
+# Function determines whether character passed is digit
+# @param char
+# @pre char is a string of length 1
+# @return
+# -# 1 if char is digit
+# -# if char is not digit 0
 def isnum( char ):
     if (ord(char) > 46 and ord(char) < 58):
         return 1
     else:
         return 0
 
-# funkcia ktoru treba spustit pre pocitanie
+##
+# Function lbidx = left bracket index determines last index at which is "(" before ")"
+# @param string
+# @pre string is instance of data type str
+# @return
+# -# -1 if "(" or ")" not found
+# -# else  last index at which is "(" before ")"
+def lbidx( string ):
+    l_idx = 0
+    i = 0
+    if (string.find("(") == -1 or string.find(")") == -1):
+        return -1 
+    for c in string:
+        if (c is "("):
+            l_idx = i
+        if(c is ")"):
+            break
+        i+=1
+    return l_idx
+
+##
+# Function rbidx = right bracket index determines first index at which is ")" after "("
+# @param string
+# @pre string is instance of data type str
+# @return
+# -# -1 if "(" or ")" not found
+# -# else  first index at which is ")" after "("
+def rbidx( string ):
+    l_idx = 0
+    i = 0
+    if (string.find("(") == -1 or string.find(")") == -1):
+        return -1 
+    for c in string:
+        if (c is "("):
+            l_idx = i
+        if(c is ")"):
+            break
+        i+=1
+    return i
+
+##
+# Function evaluates string as it is colection of mathematical operations 
+# @param string
+# @pre string is instance of data type str
+# @return result of operations from input string transformed in string format
+# @post error raised if not correct mathematical operation passed
 def evaluate( string ):
     while( string.find("(") != -1 ):
         l_idx = lbidx(string)
         r_idx = rbidx(string)
         string = string[:l_idx] +calculate(string[l_idx+1:r_idx]) + string[r_idx+1:]
     result = calculate(string)
+    result = float(result)
+    result = "%g" % result
     if(result[0] is "+"):
         return result[1:]
     else:
         return result 
 
-
+##
+# Function finds index wher number stored in string ends 
+# @param string
+# @pre string is instance of data type str
+# @return int end index of number in string
 def find_nan( string ):
     i = 0
     for c in string:
@@ -120,6 +239,16 @@ def find_nan( string ):
         i += 1
     return len(string)
 
+##
+# Function calculates trigonometric functions as sin cos tan or log 
+# @param 
+# -# string
+# -# sign is string containing sin cos tan or log - depends on operation
+# @pre 
+# -# string is instance of data type str 
+# -# sign is instance of data type str 
+# -# func is pointer to function sin cos tan or log
+# @return string with substituted values of function
 def trigonFunc(string, sign,func):
     while ( string.find(sign) > -1):
          lidx = string.find(sign)
@@ -129,8 +258,15 @@ def trigonFunc(string, sign,func):
     
     return string
 
+##
+# Function calculates values of roots and factorials and substitues them into original string 
+# @param string
+# @pre string is instance of data type str 
+# @return string with substituted values of roots and factorials
 def calcFactorSqrt( string ):
+    # starting index of number under the root
     sqr_sindex = string.rfind("\xe2\x88\x9a")
+    # searching for starting and ending indices and transforming the number from str to float
     while (sqr_sindex >= 0):
         if (isnum(string[sqr_sindex-1])):
             string = string[:sqr_sindex]  + string[sqr_sindex:]
@@ -148,6 +284,7 @@ def calcFactorSqrt( string ):
         string =  string[:sqr_sindex-sqr_sidx - 1] + sqr + string[sqr_sindex + sqr_eindex +2:]
         sqr_sindex = string.rfind("\xe2\x88\x9a")
 
+    # searching for starting and ending indices and transforming the number from str to float
     fac_eindex = string.find("!")
     while (fac_eindex >= 0):
         fac = string[:fac_eindex]
@@ -161,16 +298,19 @@ def calcFactorSqrt( string ):
     string = trigonFunc(string,"cos",cos)
     string = trigonFunc(string,"tan",tan)
     string = trigonFunc(string,"log",log)
-    #  break
-    # while ( string.find("cos(") > -1):
-    # while ( string.find("tan(") > -1):
     return string
+
+##
+# Function function determines sign of number from "before number" substring which starts with "-" or "+"  
+# @param string
+# @pre string is instance of data type str and starts with "+" or "-" 
+# @return original string with with calculated and substitued sign at the begining
 
 def determineSign( string ):
     minuses=1
     i=0
     l = len(string)
-    if(l == -1):
+    if(l == 0):
         return "+"
     # tmpstr=""
     while((string[i] is "+" or string[i] is "-" or string[i] is " ") and i < l ):
@@ -183,33 +323,11 @@ def determineSign( string ):
         string = "+" + string[i:]
     return string
 
-def lbidx( string ):
-    l_idx = 0
-    i = 0
-    if (string.find("(") == -1 or string.find(")") == -1):
-        return -1 
-    for c in string:
-        if (c is "("):
-            l_idx = i
-        if(c is ")"):
-            break
-        i+=1
-    return l_idx
-
-
-def rbidx( string ):
-    l_idx = 0
-    i = 0
-    if (string.find("(") == -1 or string.find(")") == -1):
-        return -1 
-    for c in string:
-        if (c is "("):
-            l_idx = i
-        if(c is ")"):
-            break
-        i+=1
-    return i
-
+##
+# Function evaluates value of string containing only "-" or "+" operations  
+# @param string
+# @pre string is instance of data type str and contains no other operations than "+" or "-" 
+# @return calculated value converted to str
 def calcSum( string ):
     # nacitaj prve cislo
     # vyhodnot znamienko
@@ -226,32 +344,40 @@ def calcSum( string ):
         string = str("%.12f" %  add(float(first),float(second)) + string[i:]).rstrip('0').rstrip('.')
     return string
 
+##
+# Function substitues value of "*" or "/" operations to original string  
+# @param 
+# #- string
+# #- sign is "*" or "/"
+# #- operation is pointer func
+# @pre 
+# #- string is instance of data type str 
+# #- sign is instance of data type str and can contain just "*" or "/"
+# #- operation is pointer tu function with two argumants which should be used to evaluate operation 
+# @return calculated value converted to str substitued to original string
 def calcBasicOperations( string, sign, operation ):
-    # sign index je index znamienka
+    # sign index is position of sign "*" or "/"
     sign_index = string.find(sign)
     while (sign_index >= 0):
-        # index praveho konca prveho argumentu funkcie operation
+        # index right end of first argument of function operation
         FNumIdx_r = sign_index - 1
         while (string[FNumIdx_r] is ' '):
             FNumIdx_r -= 1
         FNumIdx_l = find_nan(string[FNumIdx_r::-1])
         FNumIdx_r += 1
-        # bude prvy argument do funkcie operation
+        # will be first arg to func operation
         FNum = string[FNumIdx_r - FNumIdx_l :FNumIdx_r]
         FNumIdx_ll = FNumIdx_r - FNumIdx_l
-        # print(string[FNumIdx_r - FNumIdx_l - 1])
             
         if (string[FNumIdx_r - FNumIdx_l - 1] is "-" or string[FNumIdx_r - FNumIdx_l - 1] is "+" ):
             FNumIdx_ll = FNumIdx_r - FNumIdx_l - 1
             FNumIdx_r = find_nan(string[FNumIdx_ll +1 :])
-            # print(string[FNumIdx_r - FNumIdx_l - 1:FNumIdx_r+2])
             FNum = string[FNumIdx_ll :FNumIdx_ll + FNumIdx_r+1]
                         
 
         SNumIdx_l = sign_index + 1
         SNumIdx_r = find_nan(string[SNumIdx_l:])
         
-        # FNumIdx_r += 1
         SNum = string[SNumIdx_l:SNumIdx_l + SNumIdx_r]
         
         if (string[SNumIdx_l] is "-" or string[SNumIdx_l] is "+" ):
@@ -270,8 +396,11 @@ def calcBasicOperations( string, sign, operation ):
         sign_index = string.find(sign)
     return string
 
-    
-# vypocita jednoduchy vyraz zlozeny zo zakladnych operacii + - * / sqrt !
+##
+# Function evaluates simple expression consisting only from operations ^ * / root !   
+# @param string
+# @pre string is instance of data type str 
+# @return calculated value converted to str substitued to original string   
 def calculate( string ):
     string = calcFactorSqrt(string)
     string = calcBasicOperations( string , "^" , power )
