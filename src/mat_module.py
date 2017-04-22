@@ -1,5 +1,10 @@
 #!/bin/python
 
+## @package mat_module
+#  Documentation for math_module.
+#
+#  More details.
+
 import math
 import numbers
 

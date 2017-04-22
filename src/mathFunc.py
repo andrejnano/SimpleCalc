@@ -1,6 +1,19 @@
+## @package mathFunc
+#  Documentation for mathFunc.
+#
+#  More details.
+
+##
+# Function adds x to y
+# @param x,y
+# @return sum
 def plus(x,y):
     return 0
-    
+
+##
+# Function substracts y from x
+# @param x,y
+# @return difference    
 def minus(x,y):
     return 0
 

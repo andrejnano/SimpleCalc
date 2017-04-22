@@ -10,6 +10,26 @@
 # |   Andrej Nano           |
 # + ----------------------- +   
 
+## \mainpage SimpleCalc documentation
+# 
+# \section intro_sec Introduction
+#
+# This is the introduction about our project.
+#
+# \section authors_sec Authors
+#  
+# Andrej Nano
+#
+# Peter Marko
+#
+# Stanislav Mechl
+# 
+
+## @package main
+#  Documentation for main.
+#
+#  More details. 
+
 import kivy
 from kivy.config import Config
 from kivy.app import App
