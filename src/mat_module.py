@@ -253,7 +253,7 @@ def trigonFunc(string, sign,func):
     while ( string.find(sign) > -1):
          lidx = string.find(sign)
          ridx = lidx + 4 + find_nan(string[lidx+4:])
-         string = string[:lidx] + (str("%.12f" % func(float(string[lidx+3:ridx]))).rstrip('0').rstrip('.')) + string[ridx:]
+         string = string[:lidx] + (str("%.12f" % func(float(string[lidx+3:ridx]))).rstrip('0').rstrip('.')) + string[ridx-1:]
          break
     
     return string
