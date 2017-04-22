@@ -83,18 +83,18 @@
             text: "" 
     # 2. riadok
     Row:
-        OpButton:
-            text: "n!"
-            on_press: calculator.oppress("!")
-        OpButton:
-            text: u"\u02B8" + "\xe2\x88\x9a" + "x"
-            on_press: calculator.oppress("\xe2\x88\x9a")
-        OpButton:
-            text: u"x\u207F"
-            on_press: calculator.oppress("^")
-        OpButton:
-            text: u"\u00F7"
-            on_press: calculator.oppress("/")
+        SpButton:
+            text: "("
+            on_press: calculator.numpress(self.text)
+        SpButton:
+            text: ")"
+            on_press: calculator.numpress(self.text)
+        SpButton:
+            text: u"\u00B1"
+            on_press: calculator.switchsign()
+        SpButton:
+            text: "?"
+            on_press: app.dochelp()
         SpButton:
             text: "DEL"
             on_press: calculator.delete()
@@ -114,16 +114,18 @@
             text: "9"
             on_press: calculator.numpress(self.text)
         OpButton:
-            text: u"\u00D7"
-            on_press: calculator.oppress("*")
+            text: "n!"
+            on_press: calculator.oppress("!")
         OpButton:
-            text: "("
-            on_press: calculator.numpress(self.text)
+            text: "sin(x)"
+            font_size: 20
+            on_press: calculator.trigpress("sin")
         OpButton:
-            text: ")"
-            on_press: calculator.numpress(self.text)
+            text: "cos(x)"
+            font_size: 20
+            on_press: calculator.trigpress("cos")
 
-    
+
     # 4. riadok
     Row:
         NumButton:
@@ -139,14 +141,14 @@
             text: u"\u002D"
             on_press: calculator.oppress("-")
         OpButton:
-            text: "sin(x)"
-            font_size: 20
-            on_press: calculator.trigpress("sin")
+            text: u"\u00F7"
+            on_press: calculator.oppress("/")
         OpButton:
-            text: "cos(x)"
-            font_size: 20
-            on_press: calculator.trigpress("cos")
-    
+            text: u"\u02B8" + "\xe2\x88\x9a" + "x"
+            on_press: calculator.oppress("\xe2\x88\x9a")
+
+
+
     # 5. riadok
     Row:
         NumButton:
@@ -161,6 +163,12 @@
         OpButton:
             text: u"\u002B"
             on_press: calculator.oppress("+")
+        OpButton:
+            text: u"\u00D7"
+            on_press: calculator.oppress("*")
+        OpButton:
+            text: u"x\u207F"
+            on_press: calculator.oppress("^")
 
     # 6. riadok
     Row:
