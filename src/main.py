@@ -32,8 +32,14 @@
 
 # python modules
 import platform
+import mat_module
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 import kivy
+
 kivy.require('1.9.0')
 
 # kivy configs
@@ -61,7 +67,6 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.button import Button
-from kivy.core.window import Window
 
 
 class CalcGridLayout(GridLayout):
@@ -77,13 +82,13 @@ class CalcGridLayout(GridLayout):
 
     def oppress(self, op):
         if self.op_allowed:
-            self.display.text += op
+            self.display.text += str(op)
             self.op_allowed = False
         else: pass
 
     def calculate(self,calculation):
         try:
-            self.display.text = str(eval(calculation))
+            self.display.text = mat_module.evaluate(str(calculation))
         except Exception:
             self.display.text = 'Error'
 
