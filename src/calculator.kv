@@ -1,114 +1,160 @@
+# + ---- styly ----------
 
-<CustButton@Button>:
-    font_size: '64sp'
-    color: (0.11, 0.098, 0.098, 1)
-    background_normal: ''
-    background_color: (0.925, 0.941, 0.945, 1)
+# Vseobecny styl tlacitka
+<Button>:
     font_name: 'assets/firasansbold.ttf'
+    size_hint_x: None
+    size_hint_y: None
+    width: 75 
+    height: 75
+    background_normal: ''
+
+# Cislice
+<NumButton@Button>:
+    font_size: 32
+    color: (0.11, 0.098, 0.098, 1)
+    background_color: (0.925, 0.941, 0.945, 1)
+
+# Operacie/Funkcie
+<OpButton@Button>:
+    font_size: 32
+    color: (1, 1, 1, 1)
+    background_color: (0.11, 0.096, 0.098, 1)
+
+# Vypocet (rovna sa) 
+<EqButton@Button>:
+    font_size: 32
+    color: (1, 1, 1, 1)
+    background_color: (0.906, 0.298, 0.235, 1)
+    text: "="
+
+# Specialne tlacitka (delete, AC)
+<SpButton@Button>:
+    font_size: 32
+    background_color: (0.173, 0.243, 0.314, 1)
+    color: (1, 1, 1, 1)
+
+# Riadok tlacitok
+<Row@BoxLayout>:
+    size_hint_x: None
+    size_hint_y: None
+    width: 300
+    height: 75
+    spacing: 1
+    background_normal: ''
+    background_color: (0.173, 0.243, 0.314, 1) 
+
+# vstupne textove pole
+<InputBox@TextInput>:
+    font_size: 32
+    multiline: False
+    background_normal: ''
+    background_color: (0.843, 0.914, 0.973, 1)
+    color: (0.149, 0.137, 0.137, 1)
+    size_hint_x: None
+    size_hint_y: None
+    width: 450
+    height: 75
+
+
+# + --------------------- + 
 
 <CalcGridLayout>:
     id: calculator
-    display: entry
+    display: inputbox 
     rows: 6
-    columns: 4
+    columns: 6 
     padding: 0 
     spacing: 1
     background_normal: ''
     background_color: (0.8, 0.8, 0.8, 1)     
-
-    BoxLayout:
-        TextInput:
-            id: entry
-            font_size: '42sp'
-            multiline: False
-            background_normal: '' 
-            background_color: (0.843, 0.914, 0.973, 1)
-            color: (0.149, 0.137, 0.137, 1)
-    BoxLayout:
-        spacing: 1 
-        CustButton:
+    size_hint_x: None
+    size_hint_y: None
+    width: 450
+    height: 450
+    default_row_height: 75
+    default_col_width: 75
+    
+    # 1. riadok
+    Row:
+        InputBox:
+            id: inputbox
+            text: "" 
+    # 2. riadok
+    Row:
+        OpButton:
+            text: "x!"
+            on_press: calculator.oppress("!")
+        OpButton:
+            text: u"\u221A"
+            on_press: calculator.oppress("sqrt")
+        OpButton:
+            text: u"x\u207F"
+            on_press: calculator.oppress("exp")
+        OpButton:
+            text: u"\u00F7"
+            on_press: calculator.oppress("/")
+        SpButton:
+            text: "DEL"
+            on_press: calculator.delete()
+        SpButton:
             text: "AC"
-            on_press: entry.text = ""
-            background_color: (0.173, 0.243, 0.314, 1)
-            color: (1, 1, 1, 1)
-        CustButton:
-            text: "sqrt"
-            on_press: entry.text = "sqrt" 
-            background_color: (0.149, 0.137, 0.137, 1)
-            color: (1, 1, 1, 1) 
-        CustButton:
-            text: "exp"
-            on_press: entry.text = "exp" 
-            background_color: (0.149, 0.137, 0.137, 1)
-            color: (1, 1, 1, 1) 
-        CustButton:
-            text: "/"
-            on_press: entry.text += self.text
-            background_color: (0.149, 0.137, 0.137, 1)
-            color: (1, 1, 1, 1) 
-   
-    BoxLayout:
-        spacing: 1 
-        CustButton:
+            on_press: calculator.ac()
+    
+    # 3. riadok
+    Row:
+        NumButton:
             text: "7"
-            on_press: entry.text += self.text
-        CustButton:
+            on_press: calculator.numpress(self.text)
+        NumButton:
             text: "8"
-            on_press: entry.text += self.text
-        CustButton:
+            on_press: calculator.numpress(self.text)
+        NumButton:
             text: "9"
-            on_press: entry.text += self.text
-        CustButton:
-            text: "x"
-            on_press: entry.text += self.text
-            background_color: (0.149, 0.137, 0.137, 1)
-            color: (1, 1, 1, 1) 
-
-    BoxLayout:
-        spacing: 1
-        CustButton:
+            on_press: calculator.numpress(self.text)
+        OpButton:
+            text: u"\u00D7"
+            on_press: calculator.oppress("*")
+    
+    # 4. riadok
+    Row:
+        NumButton:
             text: "4"
-            on_press: entry.text += self.text
-        CustButton:
+            on_press: calculator.numpress(self.text)
+        NumButton:
             text: "5"
-            on_press: entry.text += self.text
-        CustButton:
+            on_press: calculator.numpress(self.text)
+        NumButton:
             text: "6"
-            on_press: entry.text += self.text
-        CustButton:
-            text: "-"
-            on_press: entry.text += self.text
-            background_color: (0.149, 0.137, 0.137, 1)
-            color: (1, 1, 1, 1) 
-
-    BoxLayout:
-        spacing: 1
-        CustButton:
+            on_press: calculator.numpress(self.text)
+        OpButton:
+            text: u"\u002D"
+            on_press: calculator.oppress("-")
+    
+    # 5. riadok
+    Row:
+        NumButton:
             text: "1"
-            on_press: entry.text += self.text
-        CustButton:
+            on_press: calculator.numpress(self.text)
+        NumButton:
             text: "2"
-            on_press: entry.text += self.text
-        CustButton:
+            on_press: calculator.numpress(self.text)
+        NumButton:
             text: "3"
-            on_press: entry.text += self.text
-        CustButton:
-            text: "+"
-            on_press: entry.text += self.text
-            background_color: (0.149, 0.137, 0.137, 1)
-            color: (1, 1, 1, 1) 
-    BoxLayout:
-        spacing: 1
-        CustButton:
+            on_press: calculator.numpress(self.text)
+        OpButton:
+            text: u"\u002B"
+            on_press: calculator.oppress("+")
+
+    # 6. riadok
+    Row:
+        NumButton:
             text: "0"
-            on_press: entry.text += self.text
-        CustButton:
+            width: 150
+        OpButton:
             text: ","
-            on_press: entry.text += self.text
-        CustButton:
-            size_hint_x: None
-            width: 600
-            background_color: (0.906, 0.298, 0.235, 1)
-            color: (1,1,1,1)
-            text: "=" 
-            on_press: calculator.calculate(entry.text)
+            background_color: (0.925, 0.941, 0.945, 1)
+            color: (0.11, 0.098, 0.098, 1)
+            on_press: calculator.oppress(".")
+        EqButton:
+            on_press: calculator.calculate(inputbox.text)
