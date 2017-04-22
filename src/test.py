@@ -106,7 +106,9 @@ def test_evaluate():
     assert mat_module.evaluate("6.022e23-6.022e22") == "%g" %  5.4198e+23
     assert mat_module.evaluate("(1+sin(2-cos(-7))-7.81)") == "%g" %  -5.86225307094
     assert mat_module.evaluate("(1+log(2-tan(-7))-7.81)") == "%g" %  -5.75518357386
-    assert mat_module.evaluate("log(2)") == "%g" %  0.69314718056
+    assert mat_module.evaluate("log(2)") == "%g" %  0.69314718056   
+    assert mat_module.evaluate("log(2)*sin(2)") == "%g" %  0.63027694769
+
     with pytest.raises(Exception):
         assert mat_module.evaluate("6.32!")
     with pytest.raises(Exception):   
