@@ -131,7 +131,9 @@ class CalculatorApp(App):
         box = BoxLayout()
 
         label1 = (Label(text="SimpleCalc v1.0\nIVS 2016/17 projekt c. 2\n\n Kalkulacku sa da ovladat pomocou tlacidiel,\n alebo textoveho vstupu.\nV pripade trigonometrickych funkcii,\n mozte vyraz zadat v tvare 'sinx' alebo 'sin(x)'.\nObidve moznosti su spravne",
+                        size=(400, 150), pos_hint={'top': 1.15}, halign='left'))
 
+        button1 = Button(text="X", size_hint_x=None, size_hint_y=None,
                          size=(45, 45), background_normal='', background_color=(0.204,0.596,0.859,1))
 
         box.add_widget(label1)
