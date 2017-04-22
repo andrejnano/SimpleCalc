@@ -72,9 +72,11 @@ class CalcGridLayout(GridLayout):
 
     def __init__(self, **kwargs):
         super(CalcGridLayout, self).__init__(**kwargs)
-        self.op_allowed = True
+        self.op_allowed = False
         self.dot_allowed = True
         self.trig_allowed = True
+        self.plus_allowed = True
+        self.minus_allowed = True
 
     def dotpress(self):
         if self.dot_allowed:
@@ -85,7 +87,21 @@ class CalcGridLayout(GridLayout):
     def numpress(self, num):
         if not self.op_allowed:
             self.op_allowed = True
+        if not self.trig_allowed:
+            self.trig_allowed = True
+        if not self.plus_allowed:
+            self.plus_allowed = True
+        if not self.minus_allowed:
+            self.minus_allowed = True
         self.display.text += num
+
+    def signpress(self, sign):
+        if sign == "+" and self.plus_allowed:
+            self.display.text += sign
+
+        elif sign == "-" and self.minus_allowed:
+            self.display.text += sign
+
 
     def oppress(self, op):
         if self.op_allowed:
@@ -104,15 +120,27 @@ class CalcGridLayout(GridLayout):
         try:
             self.display.text = mat_module.evaluate(str(calculation))
         except Exception:
-            self.display.text = 'Error'
+            self.display.text = 'ERROR'
 
     def delete(self):
+        if self.display.text[-1] == "/" or self.display.text[-1] == "*" or self.display.text[-1] == "\xe2\x88\x9a" or self.display.text[-1] == "^":
+            self.op_allowed = True
+
         self.display.text = self.display.text[:-1]
+        if self.display.text == "":
+            self.op_allowed = False
+            self.dot_allowed = True
+            self.trig_allowed = True
+            self.plus_allowed = True
+            self.minus_allowed = True
 
     def ac(self):
         self.display.text = ""
+        self.op_allowed = False
         self.dot_allowed = True
         self.trig_allowed = True
+        self.plus_allowed = True
+        self.minus_allowed = True
 
 
 class CalculatorApp(App):
@@ -120,21 +148,25 @@ class CalculatorApp(App):
     # vykreslenie
     def build(self):
         self.grid = CalcGridLayout()
+        self.title = "SimpleCalc"
+        self.icon = "assets/favicon2.ico"
         return self.grid
  
     # pomocne okno
     def dochelp(self, *args):
-        box = BoxLayout();
-        box.add_widget(Label(text="""Lorem ipsum dolor sit amet, \n consectetur
-        \nVestibulum dictum \nvelit eu mattis bibendum.
-        """, size=(600, 400), halign='center'))
+        box = BoxLayout()
 
-        button1 = Button(text="Zatvorit okno", size_hint=(None, None),
-                size=(700, 150))
+        label1 = (Label(text="SimpleCalc v1.0\nIVS 2016/17 projekt c. 2\n\n Kalkulacku sa da ovladat pomocou tlacidiel,\n alebo textoveho vstupu.\nV pripade trigonometrickych funkcii,\n mozte vyraz zadat v tvare 'sinx' alebo 'sin(x)'.\nObidve moznosti su spravne",
+                        size=(400, 150), pos_hint={'top': 1.15}, halign='left'))
+
+        button1 = Button(text="X", size_hint_x=None, size_hint_y=None,
+                         size=(45, 45), background_normal='', background_color=(0.204,0.596,0.859,1))
+
+        box.add_widget(label1)
         box.add_widget(button1)
-        
-        popup = Popup(title='Help', content=box, size_hint=(None, None),
-                size=(750, 900), background_normal='', background_color=(0, 0, 0, 0.5))
+
+        popup = Popup(title='Informacie k pouzivaniu', content=box, size_hint=(None, None),
+                size=(400, 350), background_normal='', background_color=(0, 0, 0, 0.5))
         
         button1.bind(on_press=popup.dismiss)
         popup.open()
