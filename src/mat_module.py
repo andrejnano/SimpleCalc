@@ -263,10 +263,13 @@ def calcFactorSqrt( string ):
     # searching for starting and ending indices and transforming the number from str to float
     while (sqr_sindex >= 0):
         if (isnum(string[sqr_sindex-1])):
-            string = string[:sqr_sindex]  + string[sqr_sindex:]
-            sqr_sindex += 1
+                sqr_sindex += 1
+        print(string)
         sqr = string[sqr_sindex + 2:]
-        sqr_eindex = find_nan(sqr) 
+        if(sqr[0] is "+" or sqr[0] is "-" ):
+            sqr_eindex = find_nan(sqr[1:]) + 1 
+        else:
+            sqr_eindex = find_nan(sqr) 
         sqr = sqr[:sqr_eindex]
         second = sqr
         tmpstr = string[:sqr_sindex -1]
