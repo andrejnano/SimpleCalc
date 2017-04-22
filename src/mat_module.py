@@ -1,30 +1,25 @@
 #!/bin/python
 
 ##
-# @file math_module.py
+# @file mat_module.py
 # @author Peter Marko 
-# @package math_module
+# @package mat_module
 # @date 22 April 2017
-# @brief documentation of source code of math_module which will be used in main.py 
+# @brief documentation of source code of mat_module which will be used in main.py 
 # 
 # this module defines functions for evaluation of string as mathematical operation
 #
-#  More details.
 
-##
-# Function adds x to y
-# @param x,y
-# @return sum
 import math
 import numbers
 
-# spusti funkciu evaluate pre pocitanie
-
 ##
+# ...
 # Function adds A and B
 # @param A,B
 # @pre A and B are float numbers
 # @return sum of A and B
+
 def add ( A , B ):
     if ( not (isinstance(A, numbers.Real) and isinstance(B, numbers.Real))):
         raise ValueError('Argument passed to function add is not float')
@@ -137,8 +132,8 @@ def log( A ):
 # @param A base
 # @param B exponent
 # @pre 
-# -# A and B are float numbers
-# -# B is natural whole number
+# A and B are float numbers <br>
+# B is natural whole number
 # @return A to the power B
 def power( A , B ):
     if ( not (isinstance(A, numbers.Real) and isinstance(B, numbers.Real))):
@@ -170,7 +165,7 @@ def isnum( char ):
 # @param string
 # @pre string is instance of data type str
 # @return
-# -# -1 if "(" or ")" not found
+# -# -1 if "(" or ")" not found 
 # -# else  last index at which is "(" before ")"
 def lbidx( string ):
     l_idx = 0
@@ -242,12 +237,11 @@ def find_nan( string ):
 ##
 # Function calculates trigonometric functions as sin cos tan or log 
 # @param 
-# -# string
-# -# sign is string containing sin cos tan or log - depends on operation
+# string , sign is string containing sin cos tan or log - depends on operation
 # @pre 
-# -# string is instance of data type str 
-# -# sign is instance of data type str 
-# -# func is pointer to function sin cos tan or log
+# string is instance of data type str <br> 
+# sign is instance of data type str <br>
+# func is pointer to function sin cos tan or log
 # @return string with substituted values of function
 def trigonFunc(string, sign,func):
     while ( string.find(sign) > -1):
@@ -345,15 +339,16 @@ def calcSum( string ):
     return string
 
 ##
+# ...
 # Function substitues value of "*" or "/" operations to original string  
 # @param 
-# #- string
-# #- sign is "*" or "/"
-# #- operation is pointer func
+# string <br>
+# sign is "*" or "/" <br>
+# operation is pointer to func
 # @pre 
-# #- string is instance of data type str 
-# #- sign is instance of data type str and can contain just "*" or "/"
-# #- operation is pointer tu function with two argumants which should be used to evaluate operation 
+# string is instance of data type str <br>
+# sign is instance of data type str and can contain just "*" or "/" <br>
+# operation is pointer tu function with two argumants which should be used to evaluate operation
 # @return calculated value converted to str substitued to original string
 def calcBasicOperations( string, sign, operation ):
     # sign index is position of sign "*" or "/"
