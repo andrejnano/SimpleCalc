@@ -73,6 +73,13 @@ class CalcGridLayout(GridLayout):
     def __init__(self, **kwargs):
         super(CalcGridLayout, self).__init__(**kwargs)
         self.op_allowed = True
+        self.dot_allowed = True
+
+    def dotpress(self):
+        if self.dot_allowed:
+            self.display.text += "."
+            self.dot_allowed = False
+        else: pass
 
     def numpress(self, num):
         if not self.op_allowed:
@@ -83,6 +90,7 @@ class CalcGridLayout(GridLayout):
         if self.op_allowed:
             self.display.text += str(op)
             self.op_allowed = False
+            self.dot_allowed = True
         else: pass
 
     def calculate(self,calculation):
@@ -96,6 +104,7 @@ class CalcGridLayout(GridLayout):
 
     def ac(self):
         self.display.text = ""
+        self.dot_allowed = True
 
 
 class CalculatorApp(App):
