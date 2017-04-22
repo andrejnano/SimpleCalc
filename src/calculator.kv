@@ -27,6 +27,7 @@
     color: (1, 1, 1, 1)
     background_color: (0.906, 0.298, 0.235, 1)
     text: "="
+    width: 225
 
 # Specialne tlacitka (delete, AC)
 <SpButton@Button>:
@@ -46,7 +47,7 @@
 
 # vstupne textove pole
 <InputBox@TextInput>:
-    font_size: 32
+    font_size: 44
     multiline: False
     background_normal: ''
     background_color: (0.843, 0.914, 0.973, 1)
@@ -83,10 +84,10 @@
     # 2. riadok
     Row:
         OpButton:
-            text: "x!"
+            text: "n!"
             on_press: calculator.oppress("!")
         OpButton:
-            text: "\xe2\x88\x9a"
+            text: u"\u02B8" + "\xe2\x88\x9a" + "x"
             on_press: calculator.oppress("\xe2\x88\x9a")
         OpButton:
             text: u"x\u207F"
@@ -115,6 +116,13 @@
         OpButton:
             text: u"\u00D7"
             on_press: calculator.oppress("*")
+        OpButton:
+            text: "("
+            on_press: calculator.numpress(self.text)
+        OpButton:
+            text: ")"
+            on_press: calculator.numpress(self.text)
+
     
     # 4. riadok
     Row:
@@ -130,6 +138,14 @@
         OpButton:
             text: u"\u002D"
             on_press: calculator.oppress("-")
+        OpButton:
+            text: "sin(x)"
+            font_size: 20
+            on_press: calculator.trigpress("sin")
+        OpButton:
+            text: "cos(x)"
+            font_size: 20
+            on_press: calculator.trigpress("cos")
     
     # 5. riadok
     Row:
@@ -150,7 +166,8 @@
     Row:
         NumButton:
             text: "0"
-            width: 150
+            on_press: calculator.numpress(self.text)
+            width: 151
         OpButton:
             text: ","
             background_color: (0.925, 0.941, 0.945, 1)

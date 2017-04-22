@@ -74,6 +74,7 @@ class CalcGridLayout(GridLayout):
         super(CalcGridLayout, self).__init__(**kwargs)
         self.op_allowed = True
         self.dot_allowed = True
+        self.trig_allowed = True
 
     def dotpress(self):
         if self.dot_allowed:
@@ -93,6 +94,12 @@ class CalcGridLayout(GridLayout):
             self.dot_allowed = True
         else: pass
 
+    def trigpress(self, op):
+        if self.trig_allowed:
+            self.display.text += str(op)
+            self.trig_allowed = False
+        else: pass
+
     def calculate(self,calculation):
         try:
             self.display.text = mat_module.evaluate(str(calculation))
@@ -105,6 +112,7 @@ class CalcGridLayout(GridLayout):
     def ac(self):
         self.display.text = ""
         self.dot_allowed = True
+        self.trig_allowed = True
 
 
 class CalculatorApp(App):
