@@ -224,15 +224,15 @@ def evaluate( string ):
 # @param string
 # @pre string is instance of data type str
 # @return int end index of number in string
-def find_nan( string ):
+def findEndOfNum( string ):
     i = 0
     for c in string:
-        if not ((ord(c) > 47 and ord(c) < 58) or c is '.' or c is 'e' ):
+        if not ((ord(c) > 47 and ord(c) < 58) or c is '.' or string[i:i+2].find('+e') > -1 or string[i:i+2].find('-e') > -1 or c is "e"):
             return i
         if(c is "e"):
-            return i + find_nan(string[i+2:]) + 2
+            return i + findEndOfNum(string[i+2:]) + 2
         i += 1
-    return len(string)
+    return i
 
 ##
 # Function calculates trigonometric functions as sin cos tan or log 
@@ -246,7 +246,7 @@ def find_nan( string ):
 def trigonFunc(string, sign,func):
     while ( string.find(sign) > -1):
          lidx = string.find(sign)
-         ridx = lidx + 4 + find_nan(string[lidx+4:])
+         ridx = lidx + 4 + findEndOfNum(string[lidx+4:])
          string = string[:lidx] + (str("%.12f" % func(float(string[lidx+3:ridx]))).rstrip('0').rstrip('.')) + string[ridx-1:]
          break
     
@@ -264,16 +264,15 @@ def calcFactorSqrt( string ):
     while (sqr_sindex >= 0):
         if (isnum(string[sqr_sindex-1])):
                 sqr_sindex += 1
-        print(string)
         sqr = string[sqr_sindex + 2:]
         if(sqr[0] is "+" or sqr[0] is "-" ):
-            sqr_eindex = find_nan(sqr[1:]) + 1 
+            sqr_eindex = findEndOfNum(sqr[1:]) + 1 
         else:
-            sqr_eindex = find_nan(sqr) 
+            sqr_eindex = findEndOfNum(sqr) 
         sqr = sqr[:sqr_eindex]
         second = sqr
         tmpstr = string[:sqr_sindex -1]
-        sqr_sidx = find_nan(tmpstr[::-1])
+        sqr_sidx = findEndOfNum(tmpstr[::-1])
         first = string[sqr_sindex-sqr_sidx-1:sqr_sindex-1]
         if(first is ""):
             first = "2"
@@ -285,7 +284,7 @@ def calcFactorSqrt( string ):
     fac_eindex = string.find("!")
     while (fac_eindex >= 0):
         fac = string[:fac_eindex]
-        fac_sindex = find_nan(fac[::-1]) 
+        fac_sindex = findEndOfNum(fac[::-1]) 
         fac = fac[fac_eindex - fac_sindex:fac_eindex]
         fac = str("%.12f" % factorial(float(fac))).rstrip('0').rstrip('.')
         string =  string[:fac_eindex - fac_sindex] + fac + string[fac_eindex + 1:]
@@ -330,13 +329,13 @@ def calcSum( string ):
     # vyhodnot znamienko
     while(string is not ""):
         string = determineSign(string)
-        i = 1 + find_nan(string[1:])
+        i = 1 + findEndOfNum(string[1:])
         first = string[:i]
         string = string[i:]
         if(string is ""):
             return first
         string = determineSign(string)
-        i = 1 + find_nan(string[1:])
+        i = 1 + findEndOfNum(string[1:])
         second =  string[:i]
         string = str("%.12f" %  add(float(first),float(second)) + string[i:]).rstrip('0').rstrip('.')
     return string
@@ -361,7 +360,7 @@ def calcBasicOperations( string, sign, operation ):
         FNumIdx_r = sign_index - 1
         while (string[FNumIdx_r] is ' '):
             FNumIdx_r -= 1
-        FNumIdx_l = find_nan(string[FNumIdx_r::-1])
+        FNumIdx_l = findEndOfNum(string[FNumIdx_r::-1])
         FNumIdx_r += 1
         # will be first arg to func operation
         FNum = string[FNumIdx_r - FNumIdx_l :FNumIdx_r]
@@ -369,18 +368,18 @@ def calcBasicOperations( string, sign, operation ):
             
         if (string[FNumIdx_r - FNumIdx_l - 1] is "-" or string[FNumIdx_r - FNumIdx_l - 1] is "+" ):
             FNumIdx_ll = FNumIdx_r - FNumIdx_l - 1
-            FNumIdx_r = find_nan(string[FNumIdx_ll +1 :])
+            FNumIdx_r = findEndOfNum(string[FNumIdx_ll +1 :])
             FNum = string[FNumIdx_ll :FNumIdx_ll + FNumIdx_r+1]
                         
 
         SNumIdx_l = sign_index + 1
-        SNumIdx_r = find_nan(string[SNumIdx_l:])
+        SNumIdx_r = findEndOfNum(string[SNumIdx_l:])
         
         SNum = string[SNumIdx_l:SNumIdx_l + SNumIdx_r]
         
         if (string[SNumIdx_l] is "-" or string[SNumIdx_l] is "+" ):
             SNumIdx_l += 1
-            SNumIdx_r = find_nan(string[SNumIdx_l:])
+            SNumIdx_r = findEndOfNum(string[SNumIdx_l:])
             SNum = string[SNumIdx_l-1:SNumIdx_l + SNumIdx_r]
         
         if(SNum is ""):
