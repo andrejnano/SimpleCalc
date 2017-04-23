@@ -90,8 +90,8 @@
             text: ")"
             on_press: calculator.numpress(self.text)
         SpButton:
-            text: u"\u00B1"
-            on_press: calculator.switchsign()
+            text: "\xcf\x80"
+            on_press: calculator.numpress("\xcf\x80")
         SpButton:
             text: "?"
             on_press: app.dochelp()
