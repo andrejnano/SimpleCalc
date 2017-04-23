@@ -19,7 +19,6 @@ def std_div():
         sum = mat_module.evaluate(sum+"+"+"("+data[int(j)] +"-"+ avg+")"+"^2")
         j = mat_module.evaluate("1+"+j)
     string = '\xe2\x88\x9a('+sum+"/(" + N + "-1))"
-    print(string)
     S = mat_module.evaluate(  string  )
     print(S)
     return S
