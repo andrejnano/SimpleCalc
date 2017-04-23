@@ -259,6 +259,8 @@ def trigonFunc(string, sign,func):
 # @return string with substituted values of roots and factorials
 def calcFactorSqrt( string ):
     # starting index of number under the root
+    piidx=string.find('\xcf\x80')
+    string = string[:piidx]+"3.14159265359"+string[piidx+2:]
     sqr_sindex = string.rfind("\xe2\x88\x9a")
     # searching for starting and ending indices and transforming the number from str to float
     while (sqr_sindex >= 0):
