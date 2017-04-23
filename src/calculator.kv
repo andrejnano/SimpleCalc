@@ -39,11 +39,11 @@
 <Row@BoxLayout>:
     size_hint_x: None
     size_hint_y: None
-    width: 300
+    width: 450
     height: 75
     spacing: 1
     background_normal: ''
-    background_color: (0.173, 0.243, 0.314, 1) 
+    background_color: (0.173, 0.243, 0.314, 1)
 
 # vstupne textove pole
 <InputBox@TextInput>:
@@ -54,7 +54,7 @@
     color: (0.149, 0.137, 0.137, 1)
     size_hint_x: None
     size_hint_y: None
-    width: 450
+    width: 378
     height: 75
 
 
@@ -63,7 +63,7 @@
 <CalcGridLayout>:
     id: calculator
     display: inputbox 
-    rows: 6
+    rows: 7
     columns: 6 
     padding: 0 
     spacing: 1
@@ -72,35 +72,50 @@
     size_hint_x: None
     size_hint_y: None
     width: 450
-    height: 450
+    height: 475
     default_row_height: 75
     default_col_width: 75
-    
+
+    # 0. riadok
+    Row:
+        height: 25
+        background_color: (0.11, 0.098, 0.098, 1)
+        Label:
+            text: "SimpleCalc v1.0"
+            color: (0.5, 0.5, 0.5, 1)
+            background_color: (1, 1, 1, 1)
+            width: 400
+            padding: (0, 0)
+            halign: 'left'
+
     # 1. riadok
     Row:
         InputBox:
             id: inputbox
-            text: "" 
+            text: ""
+        SpButton:
+            text: u"\u232B"
+            on_press: calculator.delete()
+
     # 2. riadok
     Row:
-        SpButton:
+        OpButton:
             text: "("
             on_press: calculator.numpress(self.text)
-        SpButton:
+        OpButton:
             text: ")"
             on_press: calculator.numpress(self.text)
-        SpButton:
-            text: u"\u00B1"
-            on_press: calculator.switchsign()
-        SpButton:
+        OpButton:
+            text: "\xcf\x80"
+            on_press: calculator.numpress("\xcf\x80")
+        OpButton:
             text: "?"
             on_press: app.dochelp()
-        SpButton:
-            text: "DEL"
-            on_press: calculator.delete()
+            width: 150
         SpButton:
             text: "AC"
             on_press: calculator.ac()
+
     
     # 3. riadok
     Row:

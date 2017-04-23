@@ -55,7 +55,7 @@ if platform.system() == "Darwin":
     Config.set('graphics', 'height', 225)
     Config.set('graphics', 'width', 225)
 else:
-    Config.set('graphics', 'height', 450)
+    Config.set('graphics', 'height', 475)
     Config.set('graphics', 'width', 450)
 
 Config.write()
@@ -82,6 +82,10 @@ class CalcGridLayout(GridLayout):
         if self.dot_allowed:
             self.display.text += "."
             self.dot_allowed = False
+            self.op_allowed = False
+            self.plus_allowed = False
+            self.minus_allowed = False
+            self.trig_allowed = False
         else: pass
 
     def numpress(self, num):
@@ -98,16 +102,22 @@ class CalcGridLayout(GridLayout):
     def signpress(self, sign):
         if sign == "+" and self.plus_allowed:
             self.display.text += sign
-
+            self.dot_allowed = True
+            self.op_allowed = False
+            self.trig_allowed = True
         elif sign == "-" and self.minus_allowed:
             self.display.text += sign
-
+            self.dot_allowed = True
+            self.op_allowed = False
+            self.trig_allowed = True
+        else: pass
 
     def oppress(self, op):
         if self.op_allowed:
             self.display.text += str(op)
             self.op_allowed = False
             self.dot_allowed = True
+            self.trig_allowed = True
         else: pass
 
     def trigpress(self, op):
@@ -123,16 +133,18 @@ class CalcGridLayout(GridLayout):
             self.display.text = 'ERROR'
 
     def delete(self):
-        if self.display.text[-1] == "/" or self.display.text[-1] == "*" or self.display.text[-1] == "\xe2\x88\x9a" or self.display.text[-1] == "^":
-            self.op_allowed = True
-
-        self.display.text = self.display.text[:-1]
         if self.display.text == "":
             self.op_allowed = False
             self.dot_allowed = True
             self.trig_allowed = True
             self.plus_allowed = True
             self.minus_allowed = True
+            return
+        if self.display.text[-1] == "/" or self.display.text[-1] == "*" or self.display.text[-1] == "\xe2\x88\x9a" or self.display.text[-1] == "^":
+            self.op_allowed = True
+
+        self.display.text = self.display.text[:-1]
+
 
     def ac(self):
         self.display.text = ""
