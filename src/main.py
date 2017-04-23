@@ -55,7 +55,7 @@ if platform.system() == "Darwin":
     Config.set('graphics', 'height', 225)
     Config.set('graphics', 'width', 225)
 else:
-    Config.set('graphics', 'height', 450)
+    Config.set('graphics', 'height', 475)
     Config.set('graphics', 'width', 450)
 
 Config.write()
