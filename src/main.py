@@ -19,16 +19,15 @@
 # \section authors_sec Authors
 #  
 # Andrej Nano
-#
 # Peter Marko
-#
 # Stanislav Mechl
 # 
 
 ## @package main
 #  Documentation for main.
 #
-#  More details. 
+
+
 
 # python modules
 import platform
@@ -77,7 +76,11 @@ class CalcGridLayout(GridLayout):
         self.trig_allowed = True
         self.plus_allowed = True
         self.minus_allowed = True
-
+##
+# Method to check if dot printing is allowed 
+# @param self
+# @pre input of dot is allowed (flag is true)
+# @return prints dot if the condition was true, otherwise nothing
     def dotpress(self):
         if self.dot_allowed:
             self.display.text += "."
@@ -87,6 +90,9 @@ class CalcGridLayout(GridLayout):
             self.minus_allowed = False
             self.trig_allowed = False
         else: pass
+
+##
+# 
 
     def numpress(self, num):
         if not self.op_allowed:
