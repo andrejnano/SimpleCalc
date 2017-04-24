@@ -27,18 +27,20 @@
 #  Documentation for main.
 #
 
-
-
 # python modules
 import platform
 import mat_module
 import sys
 
+##
+# app requires utf-8 encoding to properly display some symbols
 reload(sys)
 sys.setdefaultencoding('utf8')
 
+##
+# app uses kivy 1.9.0 as a GUI framework
+# https://kivy.org/
 import kivy
-
 kivy.require('1.9.0')
 
 # kivy configs
@@ -46,10 +48,10 @@ from kivy.config import Config
 Config.set('graphics', 'resizable', 0)
 Config.set('graphics', 'borderless', 0)
 
-#podmienka kvoli retina displeju na macu
-#automaticky sa zdvojnasobuje velkost okna.
-#na win. a linux je to ok
-
+##
+# condition for macbook retina display
+# macOS doubles the app window resolution, which causes bugged gui
+# not important for other platforms
 if platform.system() == "Darwin":
     Config.set('graphics', 'height', 225)
     Config.set('graphics', 'width', 225)
@@ -57,9 +59,11 @@ else:
     Config.set('graphics', 'height', 475)
     Config.set('graphics', 'width', 450)
 
+##
+# updates kivy configuration file
 Config.write()
 
-# kivy modules
+# kivy modules import
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
@@ -67,8 +71,15 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.button import Button
 
+##
+# custom kivy GUI layout class
+# @class CalcGridLayout
 class CalcGridLayout(GridLayout):
 
+##
+# Creator method to setup Calculator instance
+# @desc overrides the class init method and sets input rules with boolean flags,
+# @param self, kwargs
     def __init__(self, **kwargs):
         super(CalcGridLayout, self).__init__(**kwargs)
         self.op_allowed = False
@@ -92,8 +103,9 @@ class CalcGridLayout(GridLayout):
         else: pass
 
 ##
-# 
-
+# Method to adjust flags when a number was pressed
+# @param self, num
+# @return updates the display.text with the new number
     def numpress(self, num):
         if not self.op_allowed:
             self.op_allowed = True
@@ -105,6 +117,10 @@ class CalcGridLayout(GridLayout):
             self.minus_allowed = True
         self.display.text += num
 
+##
+# Method to adjust flags when a sign was pressed
+# @param self, sign
+# @desc updates the display.text with the new sign symbol
     def signpress(self, sign):
         if sign == "+" and self.plus_allowed:
             self.display.text += sign
@@ -118,6 +134,10 @@ class CalcGridLayout(GridLayout):
             self.trig_allowed = True
         else: pass
 
+##
+# Method to adjust flags when an operation was pressed
+# @param self, op
+# @desc updates the display.text with the new operation symbol
     def oppress(self, op):
         if self.op_allowed:
             self.display.text += str(op)
@@ -126,18 +146,32 @@ class CalcGridLayout(GridLayout):
             self.trig_allowed = True
         else: pass
 
+##
+# Method to adjust flags when a trigonometric function was pressed
+# @param self, op
+# @desc updates the display.text with the new trig. op symbol
     def trigpress(self, op):
         if self.trig_allowed:
             self.display.text += str(op)
             self.trig_allowed = False
         else: pass
 
+##
+# Result calculation method, uses 'mat_module' module
+# @param self, calculation
+# @desc passes string from display.text to mat_module to calculate the equation
+# @pre mat_module evaluation returns no exception
     def calculate(self,calculation):
         try:
             self.display.text = mat_module.evaluate(str(calculation))
         except Exception:
             self.display.text = 'ERROR'
-
+##
+# Character deleting method.
+# @param self
+# @desc deletes the last character in display.text
+# @pre display.text is already empty -> resets flags
+# @pre to be deleted character is an operation -> adjusts flags
     def delete(self):
         if self.display.text == "":
             self.op_allowed = False
@@ -151,7 +185,10 @@ class CalcGridLayout(GridLayout):
 
         self.display.text = self.display.text[:-1]
 
-
+##
+# All clean method.
+# @desc deletes the whole string in display.text and resets flags
+# @param self
     def ac(self):
         self.display.text = ""
         self.op_allowed = False
@@ -161,38 +198,43 @@ class CalcGridLayout(GridLayout):
         self.minus_allowed = True
 
 
+
+##
+# main application instance class
+# @class CalculatorApp
 class CalculatorApp(App):
-   
-    # vykreslenie
+
+##
+# Kivy method to build the GUI
+# @param self
+# @brief defines apps layout, title and icon
+# @return gui layout
     def build(self):
         self.grid = CalcGridLayout()
         self.title = "SimpleCalc"
         self.icon = "assets/favicon2.ico"
         return self.grid
- 
-    # pomocne okno
+
+##
+# Method to generate help popup
+# @param self, args (not used)
+# @desc adds a new widget, a help popup, to the kivy layout
     def dochelp(self, *args):
         box = BoxLayout()
-
-        label1 = (Label(text="SimpleCalc v1.0\nIVS 2016/17 projekt c. 2\n\n Kalkulacku sa da ovladat pomocou tlacidiel,\n alebo textoveho vstupu.\nV pripade trigonometrickych funkcii,\n mozte vyraz zadat v tvare 'sinx' alebo 'sin(x)'.\nObidve moznosti su spravne",
-                        size=(400, 150), pos_hint={'top': 1.15}, halign='left'))
-
-        button1 = Button(text="X", size_hint_x=None, size_hint_y=None,
-                         size=(45, 45), background_normal='', background_color=(0.204,0.596,0.859,1))
-
+        label1 = (Label(text="SimpleCalc v1.0\nIVS 2016/17 projekt c. 2\n\n Kalkulacku sa da ovladat pomocou tlacidiel,\n alebo textoveho vstupu.\nV pripade trigonometrickych funkcii,\n mozte vyraz zadat v tvare 'sinx' alebo 'sin(x)'.\nObidve moznosti su spravne", size=(400, 150), pos_hint={'top': 1.15}, halign='left'))
+        button1 = Button(text="X", size_hint_x=None, size_hint_y=None, size=(45, 45), background_normal='', background_color=(0.204,0.596,0.859,1))
         box.add_widget(label1)
         box.add_widget(button1)
-
-        popup = Popup(title='Informacie k pouzivaniu', content=box, size_hint=(None, None),
-                size=(400, 350), background_normal='', background_color=(0, 0, 0, 0.5))
-        
+        popup = Popup(title='Informacie k pouzivaniu', content=box, size_hint=(None, None), size=(400, 350), background_normal='', background_color=(0, 0, 0, 0.5))
         button1.bind(on_press=popup.dismiss)
         popup.open()
 
-
+##
+# creates Calculator instance
 calc_inst = CalculatorApp()
 
-## auto run 
+##
+# automatic
 if __name__ == "__main__":
     calc_inst.run()
 
