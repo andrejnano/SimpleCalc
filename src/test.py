@@ -108,9 +108,11 @@ def test_power():
     with pytest.raises(Exception):
         mat_module.power(64.4,-1)
     with pytest.raises(Exception):
-        mat_module.power(1.5,-2)
+        mat_module.power(1.5,-2.1)
     with pytest.raises(Exception):
-        mat_module.power()
+        mat_module.power(0.0,0.0)
+    with pytest.raises(Exception):
+        mat_module.power(-1.0,-1.0)
 
 
 def test_evaluate():

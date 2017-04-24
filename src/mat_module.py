@@ -138,7 +138,7 @@ def log( A ):
 def power( A , B ):
     if ( not (isinstance(A, numbers.Real) and isinstance(B, numbers.Real))):
         raise ValueError('Argument passed to function pow is not float')
-    if ( B < 0 or not (B).is_integer()):
+    if ( B < 0 or not (B).is_integer() or B == 0):
         raise ValueError('Power to unnatural exponent')
     else:
         result = 1
