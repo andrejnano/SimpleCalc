@@ -174,7 +174,7 @@ class CalculatorApp(App):
     def dochelp(self, *args):
         box = BoxLayout()
 
-        label1 = (Label(text="SimpleCalc v1.0\nIVS 2016/17 projekt c. 2\n\n Kalkulacku sa da ovladat pomocou tlacidiel,\n alebo textoveho vstupu.\nV pripade trigonometrickych funkcii,\n mozte vyraz zadat v tvare 'sinx' alebo 'sin(x)'.\nObidve moznosti su spravne",
+        label1 = (Label(text="SimpleCalc v1.0 - IVS 2016/17 projekt c. 2\n\n Kalkulacku lze ovladat pomoci tlacitek,\n nebo textoveho vstupu.\n\nPriklady zadani vyrazu:\nx^y  -  x na y\ny\xe2\x88\x9ax  -  y odmocnina z x\nx!  -  x faktorial\nsin(x)  -  sinus x\nsinx  -  ekvivalentni s predchozim radkem",
                         size=(400, 150), pos_hint={'top': 1.15}, halign='left'))
 
         button1 = Button(text="X", size_hint_x=None, size_hint_y=None,
@@ -183,7 +183,7 @@ class CalculatorApp(App):
         box.add_widget(label1)
         box.add_widget(button1)
 
-        popup = Popup(title='Informacie k pouzivaniu', content=box, size_hint=(None, None),
+        popup = Popup(title='Informacie k programu', content=box, size_hint=(None, None),
                 size=(400, 350), background_normal='', background_color=(0, 0, 0, 0.5))
         
         button1.bind(on_press=popup.dismiss)

@@ -6,8 +6,8 @@
 Úvod
 --------
 Program *SimpleCalc* je kalkulačka vytvořená jako projekt do předmětu IVS na
-fakultě informačních technologií VUT v Brně v roce 2017. Program je ovládaný myší a
-umožňuje počítání jednoduchých matematických výrazů.
+fakultě informačních technologií VUT v Brně v roce 2017. Program umožňuje
+počítání jednoduchých matematických výrazů.
 
 Prostredi
 ---------
