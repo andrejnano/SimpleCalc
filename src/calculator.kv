@@ -54,7 +54,7 @@
     color: (0.149, 0.137, 0.137, 1)
     size_hint_x: None
     size_hint_y: None
-    width: 378
+    width: 450
     height: 75
 
 
@@ -93,12 +93,13 @@
         InputBox:
             id: inputbox
             text: ""
-        SpButton:
-            text: u"\u232B"
-            on_press: calculator.delete()
 
     # 2. riadok
     Row:
+        OpButton:
+            text: "?"
+            on_press: app.dochelp()
+
         OpButton:
             text: "("
             on_press: calculator.numpress(self.text)
@@ -108,14 +109,12 @@
         OpButton:
             text: "\xcf\x80"
             on_press: calculator.numpress("\xcf\x80")
-        OpButton:
-            text: "?"
-            on_press: app.dochelp()
-            width: 150
+        SpButton:
+            text: u"\u232B"
+            on_press: calculator.delete()
         SpButton:
             text: "AC"
             on_press: calculator.ac()
-
     
     # 3. riadok
     Row:
