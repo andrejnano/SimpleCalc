@@ -95,12 +95,30 @@ def test_factorial():
         mat_module.factorial()
 
 
+def test_power():
+    assert (mat_module.power(5.2,3.0) - 140.608 < 0.0001)
+    assert (mat_module.power(15.34,4.0) - 55373.4316 < 0.0001)
+    assert (mat_module.power(3.3,5.0) - 391.35393 < 0.0001)
+    assert (mat_module.power(0.9,7.0) - 0.4782969 < 0.0001)
+    assert (mat_module.power(0.9,1.0) - 0.9 < 0.0001)
+    with pytest.raises(Exception):
+        mat_module.power(-2.0,0.1)
+    with pytest.raises(Exception):
+        mat_module.power(0.0,0)
+    with pytest.raises(Exception):
+        mat_module.power(64.4,-1)
+    with pytest.raises(Exception):
+        mat_module.power(1.5,-2)
+    with pytest.raises(Exception):
+        mat_module.power()
+
+
 def test_evaluate():
     assert mat_module.evaluate("\xe2\x88\x9a81") == "9"
-    assert mat_module.evaluate("2.1*(4\xe2\x88\x9a81) - 4!") == "-17.7"
+    assert mat_module.evaluate("2.1*(4\xe2\x88\x9a81)-4!") == "-17.7"
     assert mat_module.evaluate("6!") == "720" 
     assert mat_module.evaluate("10/4.654") == "%g" % 2.148689299527
-    assert mat_module.evaluate("7.32 *-1.2122") == "%g" % -8.873304
+    assert mat_module.evaluate("7.32*-1.2122") == "%g" % -8.873304
     assert mat_module.evaluate("2^3!") == "%g" %  64
     assert mat_module.evaluate("(1+7.21-4)/(3*2.84-7)") == "%g" %  2.76973684211
     assert mat_module.evaluate("6.022e23-6.022e22") == "%g" %  5.4198e+23
@@ -108,9 +126,19 @@ def test_evaluate():
     assert mat_module.evaluate("(1+log(2-tan(-7))-7.81)") == "%g" %  -5.75518357386
     assert mat_module.evaluate("log(2)") == "%g" %  0.69314718056   
     assert mat_module.evaluate("log(2)*sin(2)") == "%g" %  0.63027694769
+    assert mat_module.evaluate("log(2)*(sin(2))^3") == "%g" %  0.521126727
+    assert mat_module.evaluate("(-2)^3") == "%g" %  -8
+    assert mat_module.evaluate("sin(-\xcf\x80/2)") == "%g" %  -1
+    assert mat_module.evaluate("cos(-\xcf\x80/2)") == "%g" %  0
+    assert mat_module.evaluate("((cos(-\xcf\x80/2)+1-1)/1)^2") == "%g" %  0
+    
 
     with pytest.raises(Exception):
         assert mat_module.evaluate("6.32!")
+    with pytest.raises(Exception):
+        assert mat_module.evaluate("6.32^-1")
+    with pytest.raises(Exception):
+        assert mat_module.evaluate("6.32^1.1")
     with pytest.raises(Exception):   
         assert mat_module.evaluate("!")   
     with pytest.raises(Exception):   

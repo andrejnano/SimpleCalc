@@ -1,0 +1,29 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\MSOGL]
+"DriverVersion"=dword:00000001
+"Flags"=dword:00000001
+"Version"=dword:00000001
+"DLL"="VBoxOGL.dll"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000]
+"OpenGLDriverName"=hex(7):56,00,42,00,6f,00,78,00,4f,00,47,00,4c,00,2e,00,64,\
+  00,6c,00,6c,00,00,00,00,00
+"OpenGLDriverNameWoW"=hex(7):56,00,42,00,6f,00,78,00,4f,00,47,00,4c,00,2d,00,78,\
+  00,38,00,36,00,2e,00,64,00,6c,00,6c,00
+"OpenGLFlags"=dword:00000001
+"OpenGLFlagsWoW"=dword:00000001
+"OpenGLVersion"=dword:00000001
+"OpenGLVersionWoW"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Video\{70849E09-CC3F-417F-B4F5-ED1D9A04CCFE}\0000]
+"OpenGLDriverName"=hex(7):56,00,42,00,6f,00,78,00,4f,00,47,00,4c,00,2e,00,64,\
+  00,6c,00,6c,00,00,00,00,00
+"OpenGLDriverNameWoW"=hex(7):56,00,42,00,6f,00,78,00,4f,00,47,00,4c,00,2d,00,78,\
+  00,38,00,36,00,2e,00,64,00,6c,00,6c,00
+"OpenGLFlags"=dword:00000001
+"OpenGLFlagsWoW"=dword:00000001
+"OpenGLVersion"=dword:00000001
+"OpenGLVersionWoW"=dword:00000001

@@ -1,0 +1,10 @@
+﻿SimpleCalc v1.0 / IVS 2. proj / 2016/17
+Pokial na hosťujúcom prostredí chýba OpenGL 2.0, je potrebné tento ovládač doinštalovať
+
+1. virtualne prostredie musi byt spustene so zapnutym nastavenim 3D akceleracie
+	(VirtualBox->Settings->Display)
+2. boot Windows10, v hornej liste vybrat Devices, 'Insert Guest Additions CD image', Nainštalovať
+3. reboot
+4. otvorit 'AddOGLW8and10x64.reg' a aplikovat zmeny registrov
+5. reboot
+6. vsetko by malo spravne fungovat

@@ -155,7 +155,7 @@ def power( A , B ):
 # -# 1 if char is digit
 # -# if char is not digit 0
 def isnum( char ):
-    if (ord(char) > 46 and ord(char) < 58):
+    if (ord(char) > 47 and ord(char) < 58):
         return 1
     else:
         return 0
@@ -213,6 +213,7 @@ def evaluate( string ):
         l_idx = lbidx(string)
         r_idx = rbidx(string)
         if(len(string[r_idx+1:]) > 0 and isnum(string[r_idx+1])):
+            print(string)
             raise ValueError('Number directly after bracket')
         if(isnum(string[l_idx-1]) and l_idx > 0):
             string = string[:l_idx] +"*"+calculate(string[l_idx+1:r_idx]) + string[r_idx+1:]  
@@ -221,8 +222,11 @@ def evaluate( string ):
     result = calculate(string)
     result = float(result)
     result = "%g" % result
+
     if(result[0] is "+"):
         return result[1:]
+    if(result == "-0"):
+        return "0"
     else:
         return result 
 
@@ -254,7 +258,7 @@ def trigonFunc(string, sign,func):
     while ( string.find(sign) > -1):
          lidx = string.find(sign)
          ridx = lidx + 4 + findEndOfNum(string[lidx+4:])
-         string = string[:lidx] + (str("%.12f" % func(float(string[lidx+3:ridx]))).rstrip('0').rstrip('.')) + string[ridx-1:]
+         string = string[:lidx] + (str("%.12f" % func(float(string[lidx+3:ridx]))).rstrip('0').rstrip('.')) + string[ridx:]
          break
     
     return string
@@ -266,14 +270,18 @@ def trigonFunc(string, sign,func):
 # @return string with substituted values of roots and factorials
 def calcFactorSqrt( string ):
     # starting index of number under the root
+    
     piidx=string.find('\xcf\x80')
-    if(piidx > -1):
+    
+    while(piidx > -1):
         if(len(string[piidx:])>2 and isnum(string[piidx+2])):
             raise ValueError('Number directly after pi')
         if(isnum(string[piidx-1]) and piidx > 0):
             string = string[:piidx]+"*3.14159265359"+string[piidx+2:]            
         else:
             string = string[:piidx]+"3.14159265359"+string[piidx+2:]
+        piidx=string.find('\xcf\x80')
+    
     sqr_sindex = string.rfind("\xe2\x88\x9a")
     # searching for starting and ending indices and transforming the number from str to float
     while (sqr_sindex >= 0):
