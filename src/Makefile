@@ -11,8 +11,8 @@
 
 .PHONY: all doc clean
 
-PROGRAM_NAME='main.py'
-MAT_MODULE_NAME='mat_module.py'
+PROGRAM_NAME=main.py
+MAT_MODULE_NAME=mat_module.py
 
 doc: Doxyfile ${PROGRAM_NAME} ${MAT_MODULE_NAME} 
 	doxygen Doxyfile
