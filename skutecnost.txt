@@ -1,0 +1,8 @@
+Pred samotným vývojom projektu sme si stanovili plán s jednotlivými bodmi
+vývoja. Rozdelili sme si úlohy, dohodli sa na predbežných termínoch ukončenia
+jednotlivých častí. Napriek snahe o dodržanie plánu postupne, tak ako sme si
+ho určili, sme veľakrát počas vývoja prišli s novými nápadmi a zmenami.
+Napríklad grafické rozhranie sa vo finálnej podobe takmer vôbec nepodobá
+prvému mockupu. Podobne aj v matematickej knižnici počas vývoja pribudli nové
+funkcie a pravidlá. Stanovenie plánu bolo pre projekt jednoznačne dôležité, no
+práve priebežne pridávanie zmien malo najväčší dopad na kvalitu výslednej aplikácie.
