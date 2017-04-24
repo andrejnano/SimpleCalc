@@ -4,16 +4,19 @@
 ## Aplikácia pre 2. projekt z predmetu IVS
 ## 2017 @ FIT VUT, BRNO
 
+## Úvod
 
-Prostredi
+Program SimpleCalc je kalkulačka vytvořená jako projekt do předmětu IVS na
+fakultě informačních technologií VUT v Brně v roce 2017. Program je ovládaný myší a
+umožňuje počítání jednoduchých matematických výrazů.
+
+## Prostredi
 ---------
 
-OS 32bit
-OS 64bit
-Windows 10 32bit
-Windows 10 64bit
+    - Windows 10 32bit
+    - Windows 10 64bit
 
-Autori
+## Autori
 ------
 
 SimpleCalc
