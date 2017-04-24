@@ -207,10 +207,17 @@ def rbidx( string ):
 # @return result of operations from input string transformed in string format
 # @post error raised if not correct mathematical operation passed
 def evaluate( string ):
+    if(string.find(" ") > -1):
+        raise ValueError('String contains space')
     while( string.find("(") != -1 ):
         l_idx = lbidx(string)
         r_idx = rbidx(string)
-        string = string[:l_idx] +calculate(string[l_idx+1:r_idx]) + string[r_idx+1:]
+        if(len(string[r_idx+1:]) > 0 and isnum(string[r_idx+1])):
+            raise ValueError('Number directly after bracket')
+        if(isnum(string[l_idx-1]) and l_idx > 0):
+            string = string[:l_idx] +"*"+calculate(string[l_idx+1:r_idx]) + string[r_idx+1:]  
+        else:  
+            string = string[:l_idx] +calculate(string[l_idx+1:r_idx]) + string[r_idx+1:]
     result = calculate(string)
     result = float(result)
     result = "%g" % result
@@ -253,7 +260,7 @@ def trigonFunc(string, sign,func):
     return string
 
 ##
-# Function calculates values of roots and factorials and substitues them into original string 
+# Function calculates values of roots,factorials and pi and substitues them into original string 
 # @param string
 # @pre string is instance of data type str 
 # @return string with substituted values of roots and factorials
@@ -261,7 +268,12 @@ def calcFactorSqrt( string ):
     # starting index of number under the root
     piidx=string.find('\xcf\x80')
     if(piidx > -1):
-        string = string[:piidx]+"3.14159265359"+string[piidx+2:]
+        if(len(string[piidx:])>2 and isnum(string[piidx+2])):
+            raise ValueError('Number directly after pi')
+        if(isnum(string[piidx-1]) and piidx > 0):
+            string = string[:piidx]+"*3.14159265359"+string[piidx+2:]            
+        else:
+            string = string[:piidx]+"3.14159265359"+string[piidx+2:]
     sqr_sindex = string.rfind("\xe2\x88\x9a")
     # searching for starting and ending indices and transforming the number from str to float
     while (sqr_sindex >= 0):
