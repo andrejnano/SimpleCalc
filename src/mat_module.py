@@ -67,6 +67,8 @@ def root ( A,B ):
 # @pre A is float but natural number
 # @return factorial of A 
 def factorial( A ):
+    if ( A > 200 ):
+        raise ValueError('Too big factorial')        
     if ( not (A).is_integer()):
         raise ValueError('Argument passed to function factorial is not int')
     if ( A < 0):
