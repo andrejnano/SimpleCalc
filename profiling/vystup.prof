@@ -1,0 +1,150 @@
+142.386
+         5234 function calls in 0.005 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.005    0.005 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 _weakrefset.py:16(__init__)
+        1    0.000    0.000    0.000    0.000 _weakrefset.py:20(__enter__)
+        1    0.000    0.000    0.000    0.000 _weakrefset.py:26(__exit__)
+        1    0.000    0.000    0.000    0.000 _weakrefset.py:36(__init__)
+        1    0.000    0.000    0.000    0.000 _weakrefset.py:52(_commit_removals)
+        2    0.000    0.000    0.000    0.000 _weakrefset.py:58(__iter__)
+      129    0.000    0.000    0.000    0.000 _weakrefset.py:70(__contains__)
+        1    0.000    0.000    0.000    0.000 _weakrefset.py:83(add)
+      128    0.000    0.000    0.000    0.000 abc.py:128(__instancecheck__)
+        1    0.000    0.000    0.000    0.000 abc.py:148(__subclasscheck__)
+       10    0.000    0.000    0.000    0.000 mat_module.py:138(power)
+       26    0.000    0.000    0.000    0.000 mat_module.py:157(isnum)
+       13    0.000    0.000    0.000    0.000 mat_module.py:170(lbidx)
+       13    0.000    0.000    0.000    0.000 mat_module.py:190(rbidx)
+       42    0.000    0.000    0.005    0.000 mat_module.py:209(evaluate)
+       51    0.000    0.000    0.001    0.000 mat_module.py:23(add)
+      195    0.001    0.000    0.001    0.000 mat_module.py:238(findEndOfNum)
+      220    0.000    0.000    0.000    0.000 mat_module.py:257(trigonFunc)
+       55    0.000    0.000    0.001    0.000 mat_module.py:271(calcFactorSqrt)
+      157    0.000    0.000    0.000    0.000 mat_module.py:328(determineSign)
+       55    0.001    0.000    0.003    0.000 mat_module.py:350(calcSum)
+      165    0.000    0.000    0.001    0.000 mat_module.py:378(calcBasicOperations)
+       55    0.000    0.000    0.005    0.000 mat_module.py:424(calculate)
+        2    0.000    0.000    0.000    0.000 mat_module.py:45(div)
+        1    0.000    0.000    0.000    0.000 mat_module.py:57(root)
+        1    0.000    0.000    0.005    0.005 std_div.py:6(std_div)
+      129    0.000    0.000    0.000    0.000 {getattr}
+      128    0.000    0.000    0.001    0.000 {isinstance}
+        1    0.000    0.000    0.000    0.000 {issubclass}
+      170    0.000    0.000    0.000    0.000 {len}
+        1    0.000    0.000    0.000    0.000 {method '__subclasshook__' of 'object' objects}
+        2    0.000    0.000    0.000    0.000 {method 'add' of 'set' objects}
+       10    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+      804    0.000    0.000    0.000    0.000 {method 'find' of 'str' objects}
+       10    0.000    0.000    0.000    0.000 {method 'is_integer' of 'float' objects}
+        1    0.000    0.000    0.000    0.000 {method 'remove' of 'set' objects}
+       56    0.000    0.000    0.000    0.000 {method 'rfind' of 'str' objects}
+      128    0.000    0.000    0.000    0.000 {method 'rstrip' of 'str' objects}
+     2455    0.000    0.000    0.000    0.000 {ord}
+       10    0.000    0.000    0.000    0.000 {range}
+
+
+155.29
+         51113 function calls (51053 primitive calls) in 0.040 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.040    0.040 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 _weakrefset.py:16(__init__)
+        1    0.000    0.000    0.000    0.000 _weakrefset.py:20(__enter__)
+        1    0.000    0.000    0.000    0.000 _weakrefset.py:26(__exit__)
+        1    0.000    0.000    0.000    0.000 _weakrefset.py:36(__init__)
+        1    0.000    0.000    0.000    0.000 _weakrefset.py:52(_commit_removals)
+        2    0.000    0.000    0.000    0.000 _weakrefset.py:58(__iter__)
+     1209    0.001    0.000    0.001    0.000 _weakrefset.py:70(__contains__)
+        1    0.000    0.000    0.000    0.000 _weakrefset.py:83(add)
+     1208    0.002    0.000    0.003    0.000 abc.py:128(__instancecheck__)
+        1    0.000    0.000    0.000    0.000 abc.py:148(__subclasscheck__)
+      100    0.001    0.000    0.001    0.000 mat_module.py:138(power)
+      206    0.000    0.000    0.000    0.000 mat_module.py:157(isnum)
+      103    0.000    0.000    0.000    0.000 mat_module.py:170(lbidx)
+      103    0.000    0.000    0.000    0.000 mat_module.py:190(rbidx)
+      402    0.003    0.000    0.038    0.000 mat_module.py:209(evaluate)
+      501    0.001    0.000    0.005    0.000 mat_module.py:23(add)
+1875/1815    0.009    0.000    0.011    0.000 mat_module.py:238(findEndOfNum)
+     2020    0.001    0.000    0.002    0.000 mat_module.py:257(trigonFunc)
+      505    0.002    0.000    0.004    0.000 mat_module.py:271(calcFactorSqrt)
+     1507    0.002    0.000    0.003    0.000 mat_module.py:328(determineSign)
+      505    0.006    0.000    0.023    0.000 mat_module.py:350(calcSum)
+     1515    0.002    0.000    0.006    0.000 mat_module.py:378(calcBasicOperations)
+      505    0.002    0.000    0.034    0.000 mat_module.py:424(calculate)
+        2    0.000    0.000    0.000    0.000 mat_module.py:45(div)
+        1    0.000    0.000    0.000    0.000 mat_module.py:57(root)
+        1    0.001    0.001    0.040    0.040 std_div.py:6(std_div)
+     1209    0.000    0.000    0.000    0.000 {getattr}
+     1208    0.001    0.000    0.005    0.000 {isinstance}
+        1    0.000    0.000    0.000    0.000 {issubclass}
+     1610    0.000    0.000    0.000    0.000 {len}
+        1    0.000    0.000    0.000    0.000 {method '__subclasshook__' of 'object' objects}
+        2    0.000    0.000    0.000    0.000 {method 'add' of 'set' objects}
+      100    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+     7495    0.002    0.000    0.002    0.000 {method 'find' of 'str' objects}
+      100    0.000    0.000    0.000    0.000 {method 'is_integer' of 'float' objects}
+        1    0.000    0.000    0.000    0.000 {method 'remove' of 'set' objects}
+      506    0.000    0.000    0.000    0.000 {method 'rfind' of 'str' objects}
+     1208    0.001    0.000    0.001    0.000 {method 'rstrip' of 'str' objects}
+    25293    0.002    0.000    0.002    0.000 {ord}
+      100    0.000    0.000    0.000    0.000 {range}
+
+
+141.946
+         527732 function calls (526783 primitive calls) in 0.216 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.216    0.216 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 _weakrefset.py:16(__init__)
+        1    0.000    0.000    0.000    0.000 _weakrefset.py:20(__enter__)
+        1    0.000    0.000    0.000    0.000 _weakrefset.py:26(__exit__)
+        1    0.000    0.000    0.000    0.000 _weakrefset.py:36(__init__)
+        1    0.000    0.000    0.000    0.000 _weakrefset.py:52(_commit_removals)
+        2    0.000    0.000    0.000    0.000 _weakrefset.py:58(__iter__)
+    12009    0.005    0.000    0.005    0.000 _weakrefset.py:70(__contains__)
+        1    0.000    0.000    0.000    0.000 _weakrefset.py:83(add)
+    12008    0.009    0.000    0.016    0.000 abc.py:128(__instancecheck__)
+        1    0.000    0.000    0.000    0.000 abc.py:148(__subclasscheck__)
+     1000    0.002    0.000    0.006    0.000 mat_module.py:138(power)
+     2006    0.001    0.000    0.001    0.000 mat_module.py:157(isnum)
+     1003    0.003    0.000    0.003    0.000 mat_module.py:170(lbidx)
+     1003    0.002    0.000    0.003    0.000 mat_module.py:190(rbidx)
+     4002    0.012    0.000    0.211    0.000 mat_module.py:209(evaluate)
+     5001    0.004    0.000    0.023    0.000 mat_module.py:23(add)
+18964/18015    0.054    0.000    0.071    0.000 mat_module.py:238(findEndOfNum)
+    20020    0.007    0.000    0.010    0.000 mat_module.py:257(trigonFunc)
+     5005    0.010    0.000    0.023    0.000 mat_module.py:271(calcFactorSqrt)
+    15007    0.013    0.000    0.015    0.000 mat_module.py:328(determineSign)
+     5005    0.028    0.000    0.129    0.000 mat_module.py:350(calcSum)
+    15015    0.011    0.000    0.030    0.000 mat_module.py:378(calcBasicOperations)
+     5005    0.008    0.000    0.189    0.000 mat_module.py:424(calculate)
+        2    0.000    0.000    0.000    0.000 mat_module.py:45(div)
+        1    0.000    0.000    0.000    0.000 mat_module.py:57(root)
+        1    0.004    0.004    0.216    0.216 std_div.py:6(std_div)
+    12009    0.002    0.000    0.002    0.000 {getattr}
+    12008    0.006    0.000    0.022    0.000 {isinstance}
+        1    0.000    0.000    0.000    0.000 {issubclass}
+    16010    0.002    0.000    0.002    0.000 {len}
+        1    0.000    0.000    0.000    0.000 {method '__subclasshook__' of 'object' objects}
+        2    0.000    0.000    0.000    0.000 {method 'add' of 'set' objects}
+     1000    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+    74973    0.015    0.000    0.015    0.000 {method 'find' of 'str' objects}
+     1000    0.000    0.000    0.000    0.000 {method 'is_integer' of 'float' objects}
+        1    0.000    0.000    0.000    0.000 {method 'remove' of 'set' objects}
+     5006    0.001    0.000    0.001    0.000 {method 'rfind' of 'str' objects}
+    12008    0.003    0.000    0.003    0.000 {method 'rstrip' of 'str' objects}
+   270645    0.015    0.000    0.015    0.000 {ord}
+     1000    0.000    0.000    0.000    0.000 {range}
+
+
