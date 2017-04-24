@@ -1,6 +1,5 @@
 #!/bin/python
 import sys
-sys.path.append('../src')
 import mat_module
 import cProfile
 
@@ -22,4 +21,9 @@ def std_div():
     S = mat_module.evaluate(  string  )
     print(S)
     return S
-cProfile.run("std_div()")
+
+# ./std_div.py -p < dataset spusti vypocet s profilingom inak bez profilingu
+if(len(sys.argv) == 2 and sys.argv[1] == "-p"):
+    cProfile.run("std_div()")
+else:
+    std_div()

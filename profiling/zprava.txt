@@ -1,0 +1,12 @@
+Stručné zhrnutie profilingu:
+Podla druhého stĺpca výstupu z profileru, ktorý nám označuje celkový čas ktorý program strávil vo
+funkcii, sme usúdili ze program trávi najviac času vo funkcii findEndOfNum() ktorá vyhladáva koniec
+čísla v stringu a je najčastejšie volanou funkciou, dostane string ktory reprezentuje číslo 
+nasledované ďaľšími znakmi a táto funkcia zistí index kde číslo konči. Vykonávanie tejto funkcie
+programu zabralo približne 23% celkového času. Na druhom mieste je funkcia calcSum(), ktorej úlohov
+je spočítať sumu N čísel zadaných ako jeden string. Táto funkcia zabrala priblizne 13% doby behu
+programu. Preto by bolo najlepšie sa pri optimalizácii kódu zameriať práve na tieto dve funkcie. 
+Funkciu findEndofNum() by sme mohli rozdeliť na dve špecializované funkcie jedna by bola pre čísla
+napísané z ľava do prava a druhá pre čísla napísané odzadu,kedze cislo moze byt v tvare napr. 2.74e+42, 
+momentálne je funkcia definovaná pre obe varianty a stráca vela času pri rozhodovaní a vyhľadávaní v
+stringu.
